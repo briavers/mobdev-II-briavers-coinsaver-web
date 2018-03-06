@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', function(req, res) {
-  res.json({ message: 'Hellow Router' });
-});
+/*
+Controllers
+*/
+const nmdController = require('./controllers/nmdController');
 
-router.get('/nmd', function(req, res) {
-  res.json({ message: 'Full Stack Developer' });
-});
+/*
+Routes
+*/
+router.get('/', nmdController.index);
+router.get('/hack', nmdController.hackathon);
 
 module.exports = router;
