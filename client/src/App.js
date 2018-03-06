@@ -16,15 +16,17 @@ class App extends Component {
       .then( item => this.setState({ user: item }));      
   }
   render() {
-    let name = 'Alien';
+    let firstName = 'Alien';
+    let imageURL = '';
     if(this.state.user) {
-      name = this.state.user.data.name;
+      firstName = this.state.user.firstName;
+      imageURL = this.state.user.thumbnail.reference;
     }
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome { name }</h1>
+          <img src={imageURL} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome { firstName }</h1>
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
