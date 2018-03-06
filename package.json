@@ -15,10 +15,12 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "concurrently": "^3.5.1",
     "nodemon": "^1.15.1"
   },
   "scripts": {
     "start": "echo 'Server started in production mode.' & SET NODE_ENV=production & node server.js",
-    "start-dev": "echo 'Server started in development mode.' & SET NODE_ENV=development & nodemon --config nodemon.json server.js"
+    "start-dev": "echo 'Server started in development mode.' & SET NODE_ENV=development & nodemon --config nodemon.json server.js",
+    "c-start-dev": "concurrently \"yarn start-dev\" \"cd client && yarn start\""
   }
 }
