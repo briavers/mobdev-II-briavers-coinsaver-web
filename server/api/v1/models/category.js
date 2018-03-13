@@ -9,9 +9,23 @@ const CategorySchema = new Schema(
     updated_at: { type: Date, default: Date.now },
     deleted_at: { type: Date, required: false },
     published_at: { type: Date, required: false }
+  },
+  {
+    toJSON: { virtual: true },
+    toObject: { virtual: true }
   }
 );
 
 CategorySchema.virtual('id').get(() => this._id );
+CategorySchema.virtual('blogs', {
+  ref: 'Blog',
+  localField: '_id',
+  foreignField: '_category'
+});
+CategorySchema.virtual('posts', {
+  ref: 'Post',
+  localField: '_id',
+  foreignField: '_category'
+});
 
 module.exports = mongoose.model('Category', CategorySchema);

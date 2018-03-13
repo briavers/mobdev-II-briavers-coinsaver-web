@@ -81,6 +81,15 @@ function postCreate(title, synopsis, cb) {
   });
 }
 
+function createBlogs(cb) {
+  async.parallel([
+    function(callback) {
+      blogCreate('Blog', 'Blog heeft Dota Plus aangekondigd.', callback);
+    },
+  ],
+  cb);
+}
+
 function createCategories(cb) {
   async.parallel([
     function(callback) {
@@ -103,12 +112,13 @@ function createPosts(cb) {
 Asynchronous series
 */
 async.series([
+  createBlogs,
   createCategories,
   createPosts,
 ],
 function(err, results) {
   if (err) {
-  console.log(`FINAL ERR: ${err}`);
+    console.log(`FINAL ERR: ${err}`);
   }
   mongoose.connection.close();
 });

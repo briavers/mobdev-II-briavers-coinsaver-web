@@ -24,5 +24,5 @@
     "start-dev": "echo 'Server started in development mode.' & SET NODE_ENV=development & nodemon --config nodemon.json server.js",
     "c-start-dev": "concurrently \"yarn start-dev\" \"cd client && yarn start\""
   },
-  "proxy": "http://10.1.248.38:8080"
+  "proxy": "http://192.168.0.6:8080"
 }
