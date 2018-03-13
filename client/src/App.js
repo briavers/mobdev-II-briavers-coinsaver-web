@@ -7,29 +7,34 @@ class App extends Component {
     super();
 
     this.state = {
-      user: null
+      posts: null
     }
   }
   componentDidMount() {
-    fetch('api/v1/users')
+    fetch('api/v1/posts')
       .then( response => response .json())
-      .then( item => this.setState({ user: item }));      
+      .then( item => this.setState({ posts: item }));      
   }
   render() {
-    let firstName = 'Alien';
-    let imageURL = '';
-    if(this.state.user) {
-      firstName = this.state.user.firstName;
-      imageURL = this.state.user.thumbnail.reference;
+    let postsElement = '<p>No posts!</p>';
+    if(this.state.posts) {
+      postsElement = this.state.posts.map(
+        (element) => {
+          return (
+            <article key={ element._id }>
+              <h2>{ element.title }</h2>
+            </article>
+          );
+        }
+      )
     }
     return (
       <div className="App">
         <header className="App-header">
-          <img src={imageURL} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome { firstName }</h1>
+          
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          { postsElement }
         </p>
       </div>
     );
