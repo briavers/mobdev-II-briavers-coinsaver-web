@@ -112,9 +112,9 @@ function createPosts(cb) {
 Asynchronous series
 */
 async.series([
-  createBlogs,
   createCategories,
   createPosts,
+  createBlog,
 ],
 function(err, results) {
   if (err) {
