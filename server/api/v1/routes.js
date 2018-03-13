@@ -4,14 +4,11 @@ const router = express.Router();
 /*
 Controllers
 */
-const nmdController = require('./controllers/nmdController');
-const userController = require('./controllers/userController');
+const postController = require('./controllers/postController');
 
 /*
 Routes
 */
-router.get('/', nmdController.index);
-router.get('/hack', nmdController.hackathon);
-router.get('/users', userController.index);
+router.get('/posts', postController.get_posts);
 
 module.exports = router;
