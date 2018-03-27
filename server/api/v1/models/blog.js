@@ -9,7 +9,12 @@ const BlogSchema = new Schema(
     updated_at: { type: Date, default: Date.now },
     deleted_at: { type: Date, required: false },
     published_at: { type: Date, required: false },
+<<<<<<< HEAD
     _category: { type: Schema.Types.ObjectId, ref: 'Category', required: false}
+=======
+    _category: { type: Schema.Types.ObjectId, ref: 'Category', required: false},
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post', required: false }]
+>>>>>>> 541cfb16561867bf9c3ce8043232a7ee9fd37e19
   }
 );
 

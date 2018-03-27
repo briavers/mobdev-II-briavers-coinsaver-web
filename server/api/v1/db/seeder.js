@@ -90,7 +90,11 @@ function postCreate(title, synopsis, body, thumbnailUrl, categoryId, cb) {
 function createBlogs(cb) {
   async.parallel([
     function(callback) {
+<<<<<<< HEAD
       blogCreate(faker.lorem.sentence(), faker.lorem.paragraph(), getRandomCategory(), getRandomPosts(), callback);
+=======
+      blogCreate('Blog', 'Blog heeft Dota Plus aangekondigd.', callback);
+>>>>>>> 541cfb16561867bf9c3ce8043232a7ee9fd37e19
     },
   ],
   cb);
@@ -164,7 +168,11 @@ Asynchronous series
 async.series([
   createCategories,
   createPosts,
+<<<<<<< HEAD
   createBlogs,
+=======
+  createBlog,
+>>>>>>> 541cfb16561867bf9c3ce8043232a7ee9fd37e19
 ],
 function(err, results) {
   if (err) {
