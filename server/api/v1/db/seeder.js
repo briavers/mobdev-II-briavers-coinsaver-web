@@ -168,11 +168,7 @@ Asynchronous series
 async.series([
   createCategories,
   createPosts,
-<<<<<<< HEAD
   createBlogs,
-=======
-  createBlog,
->>>>>>> 541cfb16561867bf9c3ce8043232a7ee9fd37e19
 ],
 function(err, results) {
   if (err) {
