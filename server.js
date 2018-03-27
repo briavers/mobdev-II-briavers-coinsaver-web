@@ -19,11 +19,7 @@ const routes = require('./server/config/routes');
 /*
 Settings
 */
-<<<<<<< HEAD
 const hostName = '10.5.128.19';
-=======
-const hostName = '192.168.0.6';
->>>>>>> 541cfb16561867bf9c3ce8043232a7ee9fd37e19
 const port = '8080';
 const nodeEnv = (process.env.NODE_ENV)?process.env.NODE_ENV:'development';
 if(nodeEnv !== 'production') {
