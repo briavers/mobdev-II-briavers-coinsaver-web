@@ -9,12 +9,12 @@ const BlogSchema = new Schema(
     updated_at: { type: Date, default: Date.now },
     deleted_at: { type: Date, required: false },
     published_at: { type: Date, required: false },
-    _category: { type: Schema.Types.ObjectId, ref: 'Category', required: false}
-  }
-  ,
+    _category: { type: Schema.Types.ObjectId, ref: 'Category', required: false},
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post', required: false }]
+  },
   {
-    toJSON: { virtual: true },
-    toObject: { virtual: true }
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
 );
 

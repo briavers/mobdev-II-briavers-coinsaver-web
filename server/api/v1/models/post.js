@@ -10,11 +10,12 @@ const PostSchema = new Schema(
     updated_at: { type: Date, default: Date.now },
     deleted_at: { type: Date, required: false },
     published_at: { type: Date, required: false },
+    _blog: { type: Schema.Types.ObjectId, ref: 'Blog', required: false },
     _category: { type: Schema.Types.ObjectId, ref: 'Category', required: false }
   },
   {
-    toJSON: { virtual: true },
-    toObject: { virtual: true }
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
 );
 
