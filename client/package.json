@@ -8,10 +8,17 @@
     "react-scripts": "1.1.1"
   },
   "scripts": {
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "yarn build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --resursive",
+    "start-all": "npm-run-all -p watch-css start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://10.5.128.19:8080"
+  "proxy": "http://10.5.128.19:8080",
+  "devDependencies": {
+    "node-sass-chokidar": "^1.2.2",
+    "npm-run-all": "^4.1.2"
+  }
 }
