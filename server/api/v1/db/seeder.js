@@ -1,6 +1,10 @@
 console.log('This script populates some test posts to your database. Specified database as argument - e.g.: seeder mongodb://your_username:your_password@your_dabase_url');
 
 /*
+Cool programe
+*/
+
+/*
 Libraries
 */
 const async = require('async');
@@ -90,11 +94,7 @@ function postCreate(title, synopsis, body, thumbnailUrl, categoryId, cb) {
 function createBlogs(cb) {
   async.parallel([
     function(callback) {
-<<<<<<< HEAD
       blogCreate(faker.lorem.sentence(), faker.lorem.paragraph(), getRandomCategory(), getRandomPosts(), callback);
-=======
-      blogCreate('Blog', 'Blog heeft Dota Plus aangekondigd.', callback);
->>>>>>> 541cfb16561867bf9c3ce8043232a7ee9fd37e19
     },
   ],
   cb);
