@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+
+
 /*
 UI
 */
@@ -15,17 +16,21 @@ import {
   ListItemText
 } from 'rmwc/List';
 
+import { Button } from 'rmwc/Button';
+import './App.css';
+
 /*
 Components
 */
+import Header from './components/header/Header';
 import PostsList from './components/posts-list/PostsList';
 
 class App extends Component {
   constructor() {
     super();
-    
+
     this.state = {
-      tempOpen: true
+      persistentOpen: true
     }
   }
   render() {    
@@ -33,8 +38,8 @@ class App extends Component {
       <div>
         <Drawer
           temporary
-          open={this.state.tempOpen}
-          onClose={() => this.setState({tempOpen: false})}
+          open={this.state.persistentOpen}
+          onClose={() => this.setState({persistentOpen: false})}
         >
           <DrawerHeader>
             DrawerHeader
@@ -51,6 +56,13 @@ class App extends Component {
             </ListItem>
           </DrawerContent>
         </Drawer>
+        <Header />
+        <Button
+          onClick={() => this.setState({persistentOpen: this.state.persistentOpen === undefined ? false : !this.state.persistentOpen})}
+          raised
+        >
+          Toggle Drawer
+        </Button>
         <PostsList />
       </div>
     );
