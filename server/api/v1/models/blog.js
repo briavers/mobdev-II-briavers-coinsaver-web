@@ -8,7 +8,8 @@ const BlogSchema = new Schema(
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
     deleted_at: { type: Date, required: false },
-    published_at: { type: Date, required: false }
+    published_at: { type: Date, required: false },
+    _category: { type: Schema.Types.ObjectId, ref: 'Category', required: false}
   }
 );
 

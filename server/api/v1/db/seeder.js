@@ -5,6 +5,7 @@ Libraries
 */
 const async = require('async');
 const mongoose = require('mongoose');
+const faker = require('faker');
 
 /*
 Models
@@ -19,6 +20,11 @@ if (!userArgs[0].startsWith('mongodb://')) {
   console.log('ERROR: You need to specify a valid mongodb URL as the first argument');
   return;
 }
+
+/*
+Faker
+*/
+faker.local = 'nl';
 
 /*
 Mongoose
@@ -36,11 +42,11 @@ let blogs = [];
 let categories = [];
 let posts = [];
 
-function blogCreate(title, synopsis, cb) {
-  const blogDetail = { title: title, synopsis: synopsis };
+function blogCreate(title, synopsis, categoryId, posts, cb) {
+  const blogDetail = { title: title, synopsis: synopsis, _category: categoryId, posts: posts };
   const blog = new Blog(blogDetail);
 
-  blog.save(function (err) {
+  blog.save((err) => {
     if (err) {
       cb(err, null);
       return;
@@ -55,7 +61,7 @@ function categoryCreate(name, description, cb) {
   const categoryDetail = { name: name, description: description };
   const category = new Category(categoryDetail);
 
-  category.save(function (err) {
+  category.save((err) => {
     if (err) {
       cb(err, null);
       return;
@@ -66,11 +72,11 @@ function categoryCreate(name, description, cb) {
   });
 }
 
-function postCreate(title, synopsis, cb) {
-  const postDetail = { title: title, synopsis: synopsis };
+function postCreate(title, synopsis, body, thumbnailUrl, categoryId, cb) {
+  const postDetail = { title: title, synopsis: synopsis, body: body, thumbnailUrl: thumbnailUrl, _category: categoryId };
   const post = new Post(postDetail);
 
-  post.save(function (err) {
+  post.save((err) => {
     if (err) {
       cb(err, null);
       return;
@@ -81,10 +87,28 @@ function postCreate(title, synopsis, cb) {
   });
 }
 
+function createBlogs(cb) {
+  async.parallel([
+    function(callback) {
+      blogCreate(faker.lorem.sentence(), faker.lorem.paragraph(), getRandomCategory(), getRandomPosts(), callback);
+    },
+  ],
+  cb);
+}
+
 function createCategories(cb) {
   async.parallel([
     function(callback) {
-      categoryCreate('Valve', 'Valve heeft Dota Plus aangekondigd.', callback);
+      categoryCreate(faker.lorem.word(), faker.lorem.sentence(), callback);
+    },
+    function(callback) {
+      categoryCreate(faker.lorem.word(), faker.lorem.sentence(), callback);
+    },
+    function(callback) {
+      categoryCreate(faker.lorem.word(), faker.lorem.sentence(), callback);
+    },
+    function(callback) {
+      categoryCreate(faker.lorem.word(), faker.lorem.sentence(), callback);
     },
   ],
   cb);
@@ -93,10 +117,45 @@ function createCategories(cb) {
 function createPosts(cb) {
   async.parallel([
     function(callback) {
-      postCreate('Valve geeft Dota 2-spelers maandelijks abonnement voor extra content als optie', 'Valve heeft Dota Plus aangekondigd, een maandelijkse abonnement voor Dota 2 waarmee spelers onder meer toegang krijgen tot cosmetische items, individuele herolevels en een tool die de spelerstatistieken bijhoudt.', callback);
+      postCreate(faker.lorem.sentence(), faker.lorem.paragraph(), faker.lorem.text(), faker.image.imageUrl(), getRandomCategory(), callback);
+    },
+    function(callback) {
+      postCreate(faker.lorem.sentence(), faker.lorem.paragraph(), faker.lorem.text(), faker.image.imageUrl(), getRandomCategory(), callback);
+    },
+    function(callback) {
+      postCreate(faker.lorem.sentence(), faker.lorem.paragraph(), faker.lorem.text(), faker.image.imageUrl(), getRandomCategory(), callback);
+    },
+    function(callback) {
+      postCreate(faker.lorem.sentence(), faker.lorem.paragraph(), faker.lorem.text(), faker.image.imageUrl(), getRandomCategory(), callback);
+    },
+    function(callback) {
+      postCreate(faker.lorem.sentence(), faker.lorem.paragraph(), faker.lorem.text(), faker.image.imageUrl(), getRandomCategory(), callback);
+    },
+    function(callback) {
+      postCreate(faker.lorem.sentence(), faker.lorem.paragraph(), faker.lorem.text(), faker.image.imageUrl(), getRandomCategory(), callback);
     },
   ],
   cb);
+}
+
+function getRandomCategory() {
+  if (categories && categories.length > 0) {
+    const category = categories[Math.round(Math.random()*(categories.length-1))];
+    return category;
+  }
+  return null;
+}
+
+function getRandomPosts() {
+  if (posts && posts.length > 0) {
+    const nPosts = Math.round(Math.random()*(posts.length-1));
+    const cPosts = posts.slice(0, posts.length);
+    while(cPosts.length > nPosts) {
+      cPosts.splice(Math.round(Math.random()*(posts.length-1)), 1);
+    }
+    return cPosts;
+  }
+  return null;
 }
 
 /*
@@ -105,10 +164,11 @@ Asynchronous series
 async.series([
   createCategories,
   createPosts,
+  createBlogs,
 ],
 function(err, results) {
   if (err) {
-  console.log(`FINAL ERR: ${err}`);
+    console.log(`FINAL ERR: ${err}`);
   }
   mongoose.connection.close();
 });

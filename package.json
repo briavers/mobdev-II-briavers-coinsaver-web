@@ -9,6 +9,7 @@
     "cuid": "^2.1.0",
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
+    "faker": "^4.1.0",
     "mongoose": "^5.0.10",
     "morgan": "^1.9.0",
     "path": "^0.12.7",
@@ -24,5 +25,5 @@
     "start-dev": "echo 'Server started in development mode.' & SET NODE_ENV=development & nodemon --config nodemon.json server.js",
     "c-start-dev": "concurrently \"yarn start-dev\" \"cd client && yarn start\""
   },
-  "proxy": "http://10.1.248.38:8080"
+  "proxy": "http://10.5.128.19:8080"
 }
