@@ -4,7 +4,16 @@ import './App.css';
 /*
 UI
 */
-import * as Grapp from 'grommet/components/App';
+import {
+  Drawer,
+  DrawerHeader,
+  DrawerContent
+} from 'rmwc/Drawer';
+
+import {
+  ListItem,
+  ListItemText
+} from 'rmwc/List';
 
 /*
 Components
@@ -12,11 +21,38 @@ Components
 import PostsList from './components/posts-list/PostsList';
 
 class App extends Component {
+  constructor() {
+    super();
+    
+    this.state = {
+      tempOpen: true
+    }
+  }
   render() {    
     return (
-      <Grapp>
+      <div>
+        <Drawer
+          temporary
+          open={this.state.tempOpen}
+          onClose={() => this.setState({tempOpen: false})}
+        >
+          <DrawerHeader>
+            DrawerHeader
+          </DrawerHeader>
+          <DrawerContent>
+            <ListItem>
+              <ListItemText>Cookies</ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>Pizza</ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>Icecream</ListItemText>
+            </ListItem>
+          </DrawerContent>
+        </Drawer>
         <PostsList />
-      </Grapp>
+      </div>
     );
   }
 }
