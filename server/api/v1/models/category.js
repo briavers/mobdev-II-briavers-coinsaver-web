@@ -9,15 +9,11 @@ const CategorySchema = new Schema(
     updated_at: { type: Date, default: Date.now },
     deleted_at: { type: Date, required: false },
     published_at: { type: Date, required: false },
-<<<<<<< HEAD
     _parentCategory: { type: Schema.Types.ObjectId, ref: 'Category', required: false}
-=======
-    _parentCategory: { type: Schema.Types.ObjectId, ref: 'Category', required: false }
   },
   {
     toJSON: { virtual: true },
     toObject: { virtual: true }
->>>>>>> 541cfb16561867bf9c3ce8043232a7ee9fd37e19
   }
 );
 
