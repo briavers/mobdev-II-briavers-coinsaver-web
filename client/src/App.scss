@@ -1,2 +1,8 @@
-/** Imports styles for ALL components */
+// Import Material components
 @import 'node_modules/material-components-web/material-components-web.scss';
+
+// Import Webfonts
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+
+// Import Material icons
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';

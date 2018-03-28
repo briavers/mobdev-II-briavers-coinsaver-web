@@ -17,6 +17,7 @@ import {
 } from 'rmwc/List';
 
 import { Button } from 'rmwc/Button';
+import { Grid, GridCell } from 'rmwc/Grid';
 import './App.css';
 
 /*
@@ -63,7 +64,13 @@ class App extends Component {
         >
           Toggle Drawer
         </Button>
-        <PostsList />
+        <div style={{maxWidth: 1140 + 'px', margin: 0 auto;}}>
+          <Grid>
+            <GridCell span="12">
+              <PostsList />
+            </GridCell>
+          </Grid>
+        </div>
       </div>
     );
   }
