@@ -64,7 +64,7 @@ class App extends Component {
         >
           Toggle Drawer
         </Button>
-        <div style={{maxWidth: 1140 + 'px', margin: 0 auto;}}>
+        <div className="c-max">
           <Grid>
             <GridCell span="12">
               <PostsList />

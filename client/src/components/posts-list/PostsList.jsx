@@ -33,7 +33,7 @@ class PostsList extends Component {
       return (
         <GridInner>
           {this.state.posts.map((element, i) => (
-            <GridCell phone="12" tablet="6" desktop="4" key={i}>
+            <GridCell phone="12" tablet="4" desktop="4" key={i}>
               <Card key={ element._id }>
                 <CardPrimaryAction>
                   <CardMedia sixteenByNine style={{backgroundImage: 'url(https://material-components-web.appspot.com/images/16-9.jpg)'}}/>
@@ -57,7 +57,7 @@ class PostsList extends Component {
                 </CardActions>
               </Card>
             </GridCell>
-          ))};
+          ))}
         </GridInner>
       );
     } else {

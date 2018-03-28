@@ -14,5 +14,6 @@ Routes
 router.get('/blogs', blogController.get_blogs);
 router.get('/categories', categoryController.get_categories);
 router.get('/posts', postController.get_posts);
+router.get('/posts/:id', postController.get_post);
 
 module.exports = router;
