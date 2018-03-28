@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const errorHandler = require('../utilities/errorHandler');
 
 exports.get_posts = function(req, res, next) {
   const query = Post.find().populate('_category').populate('blogs');
@@ -6,7 +7,7 @@ exports.get_posts = function(req, res, next) {
   query.exec((err, posts) => {
     if (err) return next(err);
     if (posts == null) {
-      return handleError(`Posts not found!`, next);
+      return errorHandler.handleAPIError(`Posts not found!`, next);
     }
     return res.json(posts);
   });
@@ -19,14 +20,8 @@ exports.get_post = function(req, res, next) {
   query.exec((err, post) => {
     if (err) return next(err);
     if (post == null) {
-      return handleError(`Post not found with id: ${id}`, next);
+      return errorHandler.handleAPIError(`Post not found with id: ${id}`, next);
     }
     return res.json(post);
   });
-}
-
-function handleError(msg, next) {
-  const error = new Error(msg);
-  error.status = 404;
-  return next(error);
 }
