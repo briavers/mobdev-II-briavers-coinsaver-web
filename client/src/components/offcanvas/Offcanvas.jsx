@@ -21,6 +21,8 @@ import {
   ListItemText
 } from 'rmwc/List';
 
+import { Button, ButtonIcon } from 'rmwc/Button';
+
 /*
 Styles
 */
@@ -40,7 +42,7 @@ class Offcanvas extends Component {
         onClose={() => this.props.closeClick()}
       >
         <DrawerHeader>
-          DrawerHeader
+          <ButtonIcon use="close" onClick={() => this.props.closeClick()} />
         </DrawerHeader>
         <DrawerContent>
           <ListItem>
