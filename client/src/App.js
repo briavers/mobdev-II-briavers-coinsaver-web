@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-
 
 /*
-UI
+Libraries
 */
-import {
-  Drawer,
-  DrawerHeader,
-  DrawerContent
-} from 'rmwc/Drawer';
+import { Provider } from 'react-redux';
 
-import {
-  ListItem,
-  ListItemText
-} from 'rmwc/List';
-
-import { Button } from 'rmwc/Button';
+/*
+Webcomponents UI
+*/
 import { Grid, GridCell } from 'rmwc/Grid';
 import './App.css';
 
@@ -24,7 +15,13 @@ import './App.css';
 Components
 */
 import Header from './components/header/Header';
+import Offcanvas from './components/offcanvas';
 import PostsList from './components/posts-list/PostsList';
+
+/*
+State management via Redux
+*/
+import store from './store';
 
 class App extends Component {
   constructor() {
@@ -36,42 +33,19 @@ class App extends Component {
   }
   render() {    
     return (
-      <div>
-        <Drawer
-          temporary
-          open={this.state.persistentOpen}
-          onClose={() => this.setState({persistentOpen: false})}
-        >
-          <DrawerHeader>
-            DrawerHeader
-          </DrawerHeader>
-          <DrawerContent>
-            <ListItem>
-              <ListItemText>Cookies</ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemText>Pizza</ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemText>Icecream</ListItemText>
-            </ListItem>
-          </DrawerContent>
-        </Drawer>
-        <Header />
-        <Button
-          onClick={() => this.setState({persistentOpen: this.state.persistentOpen === undefined ? false : !this.state.persistentOpen})}
-          raised
-        >
-          Toggle Drawer
-        </Button>
-        <div className="c-max">
-          <Grid>
-            <GridCell span="12">
-              <PostsList />
-            </GridCell>
-          </Grid>
+      <Provider store={store}>
+        <div>
+          <Offcanvas />
+          <Header />
+          <div className="c-max">
+            <Grid>
+              <GridCell span="12">
+                <PostsList />
+              </GridCell>
+            </Grid>
+          </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 }
