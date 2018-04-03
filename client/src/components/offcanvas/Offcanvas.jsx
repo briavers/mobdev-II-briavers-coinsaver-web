@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 /*
+Libraries
+*/
+import { Link } from 'react-router-dom';
+
+/*
 State management
 */
 import { connect } from 'react-redux';
@@ -45,15 +50,8 @@ class Offcanvas extends Component {
           <ButtonIcon use="close" onClick={() => this.props.closeClick()} />
         </DrawerHeader>
         <DrawerContent>
-          <ListItem>
-            <ListItemText>Cookies</ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>Pizza</ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>Icecream</ListItemText>
-          </ListItem>
+          <Link to={{ pathname: '/home' }}>Home</Link>
+          <Link to={{ pathname: '/posts' }}>Posts</Link>
         </DrawerContent>
       </Drawer>
     )

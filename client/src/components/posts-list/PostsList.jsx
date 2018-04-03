@@ -23,7 +23,7 @@ class PostsList extends Component {
   }
 
   componentDidMount() {
-    fetch('api/v1/posts')
+    fetch('/api/v1/posts')
       .then( response => response.json())
       .then( item => this.setState({ posts: item })); 
   }
