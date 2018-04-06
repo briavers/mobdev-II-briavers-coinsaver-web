@@ -13,20 +13,11 @@ import { connect } from 'react-redux';
 import { closeOffcanvas } from '../../actions/offcanvasActions';
 
 /*
-Webcomponents UI
+Material UI
 */
-import {
-  Drawer,
-  DrawerHeader,
-  DrawerContent
-} from 'rmwc/Drawer';
-
-import {
-  ListItem,
-  ListItemText
-} from 'rmwc/List';
-
-import { Button, ButtonIcon } from 'rmwc/Button';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 
 /*
 Styles
@@ -39,20 +30,30 @@ class Offcanvas extends Component {
     super(props);
   }
 
+  authLinks() {
+    if (this.props.authenticated) {
+      return [
+        <MenuItem onClick={() => this.props.closeClick()} primaryText="Sign out" containerElement={Link} to="/signout" />
+      ];
+    }
+    return [
+      <MenuItem onClick={() => this.props.closeClick()} primaryText="Sign in" containerElement={Link} to="/signin" />,
+      <MenuItem onClick={() => this.props.closeClick()} primaryText="Sign up" containerElement={Link} to="/signup" />
+    ];
+  }
+
   render() {
     return (
       <Drawer
-        temporary
+        docked={false}
+        width={320}
         open={this.props.offcanvasOpened}
-        onClose={() => this.props.closeClick()}
+        onRequestChange={(open) => this.props.closeClick()}
       >
-        <DrawerHeader>
-          <ButtonIcon use="close" onClick={() => this.props.closeClick()} />
-        </DrawerHeader>
-        <DrawerContent>
-          <Link to={{ pathname: '/home' }}>Home</Link>
-          <Link to={{ pathname: '/posts' }}>Posts</Link>
-        </DrawerContent>
+        <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="/">Home</MenuItem>
+        <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="/posts">News</MenuItem>
+        {this.authLinks()}
+        <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="*">404</MenuItem>
       </Drawer>
     )
   }
@@ -64,6 +65,7 @@ Offcanvas.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    authenticated: state.auth.authenticated,
     offcanvasOpened: state.offcanvas.offcanvasOpened
   };
 };

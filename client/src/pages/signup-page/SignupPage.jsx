@@ -8,14 +8,13 @@ Material UI
 /*
 Components
 */
-import PostDetail from '../../components/post-detail/PostDetail';
 
 /*
 Component styles
 */
-import './PostPage.css';
+import './SignupPage.css';
 
-class PostPage extends Component {
+class SignupPage extends Component {
   constructor(props) {
     super(props);
   }
@@ -24,11 +23,11 @@ class PostPage extends Component {
     return (
       <div>
         <div className="c-max">
-              <PostDetail postId={ this.props.match.params.id }/>
+          
         </div>
       </div>
     )
   }
 }
 
-export default (PostPage);
+export default (SignupPage);

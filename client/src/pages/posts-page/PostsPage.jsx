@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 /*
-Webcomponents UI
+Material UI
 */
-import { Grid, GridCell } from 'rmwc/Grid';
+
 
 /*
 Components
@@ -23,12 +23,12 @@ class PostsPage extends Component {
   render() {
     return (
       <div>
-        <div className="c-max">
-          <Grid>
-            <GridCell span="12">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
               <PostsList />
-            </GridCell>
-          </Grid>
+            </div>
+          </div>
         </div>
       </div>
     )

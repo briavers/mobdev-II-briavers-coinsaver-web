@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 
-import {
-  Card,
-  CardPrimaryAction,
-  CardMedia,
-  CardAction,
-  CardActions,
-  CardActionButtons,
-  CardActionIcons
-} from 'rmwc/Card';
-import { Typography } from 'rmwc/Typography';
-import { GridInner, GridCell } from 'rmwc/Grid';
+/*
+Material UI
+*/
 
 class PostDetail extends Component {
 

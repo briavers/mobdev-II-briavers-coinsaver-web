@@ -4,56 +4,48 @@ import React, { Component } from 'react';
 Libraries
 */
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 /*
-Webcomponents UI
+Material UI
 */
-import { Grid, GridCell } from 'rmwc/Grid';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 
 /*
-Components
+Layouts
 */
-import Header from './components/header/Header';
-import Offcanvas from './components/offcanvas';
+import Main from './layouts/main/Main';
 
 /*
-Page components
+Configuration
 */
-import HomePage from './pages/home-page/HomePage';
-import NotFoundPage from './pages/not-found-page/NotFoundPage';
-import PostPage from './pages/post-page/PostPage';
-import PostsPage from './pages/posts-page/PostsPage';
+import config from './config.json';
 
 /*
 State management via Redux
 */
 import store from './store';
 
-class App extends Component {
-  constructor() {
-    super();
+/*
+Auth state
+*/
+import { AUTHENTICATED, UNAUTHENTICATED } from './constants';
+const auth = localStorage.getItem('mobdev2_auth');
+if(auth) {
+  store.dispatch({ type: AUTHENTICATED, payload: JSON.parse(auth) });
+} else {
+  store.dispatch({ type: UNAUTHENTICATED });
+}
 
-    this.state = {
-      persistentOpen: true
-    }
-  }
+class App extends Component {
   render() {    
     return (
       <Provider store={store}>
         <Router>
-          <div>
-            <Offcanvas />
-            <Header />
-            <Switch>
-              <Route exact path='/' component={HomePage}/>
-              <Redirect from="/home" to="/"/>
-              <Route exact path='/posts' component={PostsPage}/>
-              <Route path='/posts/:id' component={PostPage}/>
-              <Route path="*" component={NotFoundPage}/>
-            </Switch>
-          </div>
+          <MuiThemeProvider>
+            <Main />
+          </MuiThemeProvider>
         </Router>
       </Provider>
     );

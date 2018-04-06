@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 
-import {
-  Card,
-  CardPrimaryAction,
-  CardMedia,
-  CardAction,
-  CardActions,
-  CardActionButtons,
-  CardActionIcons
-} from 'rmwc/Card';
-import { Typography } from 'rmwc/Typography';
-import { GridInner, GridCell } from 'rmwc/Grid';
+/*
+Material UI
+*/
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 class PostsList extends Component {
 
@@ -31,40 +25,30 @@ class PostsList extends Component {
   render() {
     if(this.state.posts) {
       return (
-        <GridInner>
+        <div className="row">
           {this.state.posts.map((element, i) => (
-            <GridCell phone="12" tablet="4" desktop="4" key={i}>
+            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" key={i}>
               <Card key={ element._id }>
-                <CardPrimaryAction>
-                  <CardMedia sixteenByNine style={{backgroundImage: 'url(https://material-components-web.appspot.com/images/16-9.jpg)'}}/>
-                  <div style={{padding: '0 1rem 1rem 1rem'}}>
-                    <Typography use="title" tag="h2">{ element.title }</Typography>
-                    <Typography
-                      use="subheading1"
-                      tag="h3"
-                      theme="text-secondary-on-background"
-                      style={{marginTop: '-1rem'}}
-                    >
-                      by Kurt Wagner
-                    </Typography>
-                    <Typography use="body1" tag="div" theme="text-secondary-on-background">{ element.synopsis }</Typography>
-                  </div>
-                </CardPrimaryAction>
+                <CardMedia>
+                  <img src="https://material-components-web.appspot.com/images/16-9.jpg" alt="" />
+                </CardMedia>
+                <CardTitle title={ element.title }/>
+                <CardText>
+                  { element.synopsis }
+                </CardText>
                 <CardActions>
-                  <CardActionButtons>
-                    <CardAction>{ (element._category) ? element._category.name : 'Uncategorized' }</CardAction>
-                  </CardActionButtons>
+                  <FlatButton label={ (element._category) ? element._category.name : 'Uncategorized' } />
                 </CardActions>
               </Card>
-            </GridCell>
+            </div>
           ))}
-        </GridInner>
+        </div>
       );
     } else {
       return (
-        <GridCell span="12">
-          <div>No posts!</div>
-        </GridCell>
+        <div>
+
+        </div>
       )
     }   
   }

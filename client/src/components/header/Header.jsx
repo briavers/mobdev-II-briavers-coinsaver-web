@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 
 /*
+Libraries
+*/
+import {Link} from 'react-router-dom';
+
+/*
 State management
 */
 import { connect } from 'react-redux';
 import { toggleOffcanvas } from '../../actions/offcanvasActions';
 
 /*
-UI
+Material UI
 */
-import {
-  Toolbar,
-  ToolbarRow,
-  ToolbarSection,
-  ToolbarTitle,
-  ToolbarMenuIcon,
-  ToolbarIcon
-} from 'rmwc/Toolbar';
+import IconMenu from 'material-ui/IconMenu';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import MenuItem from 'material-ui/MenuItem';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import FlatButton from 'material-ui/FlatButton';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
+import ActionPermIdentity from 'material-ui/svg-icons/action/perm-identity';
 
 /*
 Component styles
@@ -35,19 +42,38 @@ class Header extends Component {
     this.props.hamburgerClick();
   }
 
+  userLinks() {
+    if (this.props.authenticated) {
+      return [
+        <MenuItem primaryText="Profile" containerElement={Link} to="/profile" />,
+        <MenuItem primaryText="Sign out" containerElement={Link} to="/signout" />
+      ];
+    }
+    return [
+      <MenuItem primaryText="Sign in" containerElement={Link} to="/signin" />,
+      <MenuItem primaryText="Sign up" containerElement={Link} to="/signup" />
+    ];
+  }
+
   render() {
     return (
-      <Toolbar fixed>
-        <ToolbarRow>
-          <ToolbarSection alignStart>
-            <ToolbarMenuIcon use="menu" onClick={ this.handleHamburgerClick }/>
-            <ToolbarTitle>New Media Development</ToolbarTitle>
-          </ToolbarSection>
-          <ToolbarSection alignEnd>
-            <ToolbarIcon use="star"/>
-            <ToolbarIcon use="print"/>
-          </ToolbarSection>
-        </ToolbarRow>
+      <Toolbar>
+        <ToolbarGroup firstChild={true}>
+          <FlatButton icon={<NavigationMenu />} primary={true} onClick={ this.handleHamburgerClick } />
+          <ToolbarTitle text="Mobile Development 2" />
+        </ToolbarGroup>
+        <ToolbarGroup>
+          <ToolbarSeparator />
+          <IconMenu
+            iconButtonElement={
+              <IconButton touch={true}>
+                <ActionPermIdentity />
+              </IconButton>
+            }
+          >
+            { this.userLinks() }
+          </IconMenu>
+        </ToolbarGroup>
       </Toolbar>
     )
   }
@@ -55,6 +81,7 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    authenticated: state.auth.authenticated,
     offcanvasOpened: state.offcanvas.offcanvasOpened
   };
 };
