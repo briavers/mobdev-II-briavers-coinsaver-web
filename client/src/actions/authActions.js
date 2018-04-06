@@ -31,7 +31,6 @@ export function signInActionLocalStrategy({ email, password }, history) {
 export function signInActionFacebookStrategy(accessToken, history) {
   return async (dispatch) => {
     try {
-      console.log(accessToken);
       const postData = new Blob([JSON.stringify({access_token: accessToken}, null, 2)], {type : 'application/json'});
       const options = {
           method: 'POST',
@@ -41,7 +40,7 @@ export function signInActionFacebookStrategy(accessToken, history) {
       };
       const response = await fetch('/api/v1/auth/facebook', options);
       const responseJson = await response.json();
-      console.log(responseJson);
+      console.log(response);
 
       /*
       const token = r.headers.get('x-auth-token');

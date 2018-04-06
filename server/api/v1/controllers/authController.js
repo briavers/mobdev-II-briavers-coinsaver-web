@@ -31,7 +31,8 @@ exports.user_auth_local_post = function(req, res, next) {
         id: user.id,
         email: user.email
       },
-      token: `${token}`
+      token: `${token}`,
+      strategy: 'local'
     });
   })(req, res, next);
 }
@@ -53,7 +54,8 @@ exports.user_auth_facebook_post = function(req, res, next) {
         id: user.id,
         email: user.email
       },
-      token: `${token}`
+      token: `${token}`,
+      strategy: 'facebook-token'
     });
   })(req, res, next);
 }

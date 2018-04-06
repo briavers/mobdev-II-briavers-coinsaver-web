@@ -14,7 +14,8 @@ function authReducer(state = initialState, action) {
       });
     case UNAUTHENTICATED:
       return Object.assign({}, state, {
-        authenticated: false
+        authenticated: false,
+        auth: null
       });
     case AUTHENTICATION_ERROR:
       return Object.assign({}, state, {

@@ -45,13 +45,13 @@ class Header extends Component {
   userLinks() {
     if (this.props.authenticated) {
       return [
-        <MenuItem primaryText="Profile" containerElement={Link} to="/profile" />,
-        <MenuItem primaryText="Sign out" containerElement={Link} to="/signout" />
+        <MenuItem primaryText="Profile" containerElement={Link} to="/profile" key={1}/>,
+        <MenuItem primaryText="Sign out" containerElement={Link} to="/signout" key={2} />
       ];
     }
     return [
-      <MenuItem primaryText="Sign in" containerElement={Link} to="/signin" />,
-      <MenuItem primaryText="Sign up" containerElement={Link} to="/signup" />
+      <MenuItem primaryText="Sign in" containerElement={Link} to="/signin" key={1} />,
+      <MenuItem primaryText="Sign up" containerElement={Link} to="/signup" key={2} />
     ];
   }
 

@@ -27,6 +27,8 @@ import SignInPage from '../../pages/sign-in-page/SignInPage';
 import SignOutPage from '../../pages/sign-out-page/SignOutPage';
 import SignupPage from '../../pages/signup-page/SignupPage';
 
+import PostCreatePage from '../../pages/post-create-page/PostCreatePage';
+
 class Main extends Component {
   render() {    
     return (
@@ -41,6 +43,7 @@ class Main extends Component {
           <Route path='/signin' component={SignInPage}/>
           <Route path='/signout' component={SignOutPage}/>
           <Route path='/signup' component={SignupPage}/>
+          <Route path='/backoffice/post-create' component={PostCreatePage}/>
           <Route path="*" component={NotFoundPage}/>
         </Switch>
       </div>

@@ -33,12 +33,18 @@ class Offcanvas extends Component {
   authLinks() {
     if (this.props.authenticated) {
       return [
-        <MenuItem onClick={() => this.props.closeClick()} primaryText="Sign out" containerElement={Link} to="/signout" />
+        <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="/" key={1}>Home</MenuItem>,
+        <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="/posts" key={2}>News</MenuItem>,
+        <MenuItem onClick={() => this.props.closeClick()} primaryText="Sign out" containerElement={Link} to="/signout" key={3} />,
+        <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="*" key={4}>404</MenuItem>
       ];
     }
     return [
-      <MenuItem onClick={() => this.props.closeClick()} primaryText="Sign in" containerElement={Link} to="/signin" />,
-      <MenuItem onClick={() => this.props.closeClick()} primaryText="Sign up" containerElement={Link} to="/signup" />
+      <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="/" key={1}>Home</MenuItem>,
+      <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="/posts" key={2}>News</MenuItem>,
+      <MenuItem onClick={() => this.props.closeClick()} primaryText="Sign in" containerElement={Link} to="/signin"  key={3}/>,
+      <MenuItem onClick={() => this.props.closeClick()} primaryText="Sign up" containerElement={Link} to="/signup"  key={4}/>,
+      <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="*" key={5}>404</MenuItem>
     ];
   }
 
@@ -50,10 +56,7 @@ class Offcanvas extends Component {
         open={this.props.offcanvasOpened}
         onRequestChange={(open) => this.props.closeClick()}
       >
-        <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="/">Home</MenuItem>
-        <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="/posts">News</MenuItem>
         {this.authLinks()}
-        <MenuItem onClick={() => this.props.closeClick()} containerElement={Link} to="*">404</MenuItem>
       </Drawer>
     )
   }
