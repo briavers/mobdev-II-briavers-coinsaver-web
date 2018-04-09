@@ -10,17 +10,19 @@ import { Field, reduxForm } from 'redux-form';
 State management
 */
 import { connect } from 'react-redux';
+import { createPost } from '../../actions/postActions';
 
 /*
 Material UI
 */
+import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
-import { renderTextField } from '../../utilities/ReduxFormToMaterialForm';
+import { renderTextField, renderSelectField } from '../../utilities/ReduxFormToMaterialForm';
 
 /*
 Styles
 */
-import './PostCreate.css';
+import './PostForm.css';
 
 /*
 Configuration
@@ -45,9 +47,50 @@ const validate = values => {
 }
 
 
-class PostCreate extends Component {
+class PostForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      categories: undefined
+    }
+  }
+
   submit = (values) => {
-    this.props.signIn(values, this.props.history);
+    this.props.createPost(values, this.props.history);
+  }
+
+  componentDidMount = () => {
+    this.fetchPostCreateGet();
+  }
+
+  fetchPostCreateGet = () => {
+    fetch('/api/v1/post', {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(res => res.json())
+    .then(post =>
+      this.setState( {
+        categories: post.categories
+      })
+    );
+  }
+
+  getCategoriesAsJSX = () => {
+    let categoryElements = '';
+    if(this.state.categories) {
+      categoryElements = this.state.categories.map(
+        (element) => {
+          return (
+            <MenuItem value={ element._id } key={ element._id }>{ element.name }</MenuItem>
+          );
+        }
+      )
+    };
+    return categoryElements;
   }
 
   errorMessage() {
@@ -100,6 +143,15 @@ class PostCreate extends Component {
               />
             </div>
             <div className="col-12">
+              <Field
+                name="category"
+                component={renderSelectField}
+                label="Category"
+              >
+                { this.getCategoriesAsJSX() }
+              </Field>
+            </div>
+            <div className="col-12">
               <RaisedButton type="submit" label="Add post" primary={true} fullWidth={true} />
             </div>
           </form>
@@ -114,24 +166,25 @@ class PostCreate extends Component {
   }
 }
 
-PostCreate.propTypes = {
-  /*authError: PropTypes.object,*/
+PostForm.propTypes = {
+  postCreationError: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
   return {
-    /*postError: state.postCreate.error*/
+    postCreationError: state.post.error
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    createPost: (values, history) => dispatch(createPost(values, history)),
   };
 };
 
-const reduxFormPostCreate = reduxForm({
+const reduxFormPostForm = reduxForm({
   form: 'postCreate',
   validate
-})(PostCreate);
+})(PostForm);
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxFormPostCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(reduxFormPostForm);

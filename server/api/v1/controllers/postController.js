@@ -1,4 +1,7 @@
+const async = require('async');
+
 const Post = require('../models/post');
+const Category = require('../models/category');
 const errorHandler = require('../utilities/errorHandler');
 
 exports.get_posts = function(req, res, next) {
@@ -23,5 +26,24 @@ exports.get_post = function(req, res, next) {
       return errorHandler.handleAPIError(`Post not found with id: ${id}`, next);
     }
     return res.json(post);
+  });
+}
+
+exports.post_create_get = function(req, res, next) {
+  async.parallel({
+      categories: function(callback) {
+        Category.find(callback).sort( { created_at: -1} );
+      },
+  }, function(err, results) {
+      if (err) { return next(err); }
+      res.json( { title: 'Create Post', categories: results.categories });
+  });
+}
+
+exports.post_create_post = function(req, res, next) {
+  const post = new Post(req.body);
+  post.save((err, post) => {
+    if (err) return next(err);
+    res.status(201).json(post);
   });
 }

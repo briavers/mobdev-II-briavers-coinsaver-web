@@ -21,7 +21,8 @@ router.get('/categories/:id', categoryController.get_category);
 //router.get('/posts', auth.authenticateJwt(), postController.get_posts);// Securing the end-point to-do
 router.get('/posts', postController.get_posts);
 router.get('/posts/:id', postController.get_post);
-router.get('/posts/:id', postController.get_post);
+router.get('/post', postController.post_create_get);
+router.post('/post', postController.post_create_post);
 router.post('/signup', authController.user_create_post);
 authRouter.post('/local', authController.user_auth_local_post);
 authRouter.post('/facebook', authController.user_auth_facebook_post);

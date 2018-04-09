@@ -88,5 +88,5 @@ app.use((err, req, res, next) => {
 Launch server
 */
 server.listen(port, hostName, () => {
-    console.log(`Node server running at http://${hostName}:${port}/!`)
+    console.log(`Node server running at https://${hostName}:${port}/!`)
 });

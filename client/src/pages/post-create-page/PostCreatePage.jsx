@@ -13,7 +13,7 @@ Material UI
 /*
 Components
 */
-import PostCreate from '../../components/post-create/PostCreate';
+import PostForm from '../../components/post-form/PostForm';
 
 /*
 Component styles
@@ -27,7 +27,7 @@ class PostCreatePage extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-              <PostCreate />
+              <PostForm />
             </div>
           </div>
         </div>
