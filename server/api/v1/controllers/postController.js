@@ -122,3 +122,48 @@ exports.post_delete_delete = function(req, res, next) {
       return errorHandler.handleAPIError(500, `Could not delete post with id: ${id}`, next);
     });
 }
+
+/*
+Soft-delete a post
+*/
+exports.post_softdelete_patch = function(req, res, next) {
+  const id = req.params.postId;
+
+  Post.findByIdAndUpdate(id, {
+    deleted_at: Date.now()
+  }, {new: true})
+    .then(post => {
+      if(!post) {
+        return errorHandler.handleAPIError(404, `Post not found with id: ${id}`, next);
+      }
+      res.send(post);
+    }).catch(err => {
+      console.log(err);
+      if(err.kind === 'ObjectId') {
+        return errorHandler.handleAPIError(404, `Post not found with id: ${id}`, next);            
+      }
+      return errorHandler.handleAPIError(500, `Could not soft-delete post with id: ${id}`, next);
+    });
+}
+
+/*
+Soft-undelete a post
+*/
+exports.post_softundelete_patch = function(req, res, next) {
+  const id = req.params.postId;
+
+  Post.findByIdAndUpdate(id, {
+    deleted_at: null
+  }, {new: true})
+    .then(post => {
+      if(!post) {
+        return errorHandler.handleAPIError(404, `Post not found with id: ${id}`, next);
+      }
+      res.send(post);
+    }).catch(err => {
+      if(err.kind === 'ObjectId') {
+        return errorHandler.handleAPIError(404, `Post not found with id: ${id}`, next);            
+      }
+      return errorHandler.handleAPIError(500, `Could not soft-undelete post with id: ${id}`, next);
+    });
+}

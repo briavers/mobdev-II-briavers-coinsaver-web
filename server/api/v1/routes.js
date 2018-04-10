@@ -26,6 +26,8 @@ router.post('/posts', postController.post_create_post);
 router.get('/posts/:postId/update', postController.post_update_get);
 router.put('/posts/:postId', postController.post_update_put);
 router.delete('/posts/:postId', postController.post_delete_delete);
+router.patch('/posts/:postId/softdelete', postController.post_softdelete_patch);
+router.patch('/posts/:postId/softundelete', postController.post_softundelete_patch);
 router.post('/signup', authController.user_create_post);
 authRouter.post('/local', authController.user_auth_local_post);
 authRouter.post('/facebook', authController.user_auth_facebook_post);
