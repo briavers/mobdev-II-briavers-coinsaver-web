@@ -28,6 +28,7 @@ import SignOutPage from '../../pages/sign-out-page/SignOutPage';
 import SignupPage from '../../pages/signup-page/SignupPage';
 
 import PostCreatePage from '../../pages/post-create-page/PostCreatePage';
+import PostsTablePage from '../../pages/posts-table-page/PostsTablePage';
 
 class Main extends Component {
   render() {    
@@ -43,6 +44,7 @@ class Main extends Component {
           <Route path='/signin' component={SignInPage}/>
           <Route path='/signout' component={SignOutPage}/>
           <Route path='/signup' component={SignupPage}/>
+          <Route path='/backoffice/posts-table' component={PostsTablePage}/>
           <Route path='/backoffice/post-create' component={PostCreatePage}/>
           <Route path="*" component={NotFoundPage}/>
         </Switch>

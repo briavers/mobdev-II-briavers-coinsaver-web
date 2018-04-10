@@ -1,5 +1,5 @@
-exports.handleAPIError = function(msg, next) {
+exports.handleAPIError = function(status, msg, next) {
   const error = new Error(msg);
-  error.status = 404;
+  error.status = status;
   return next(error);
 }

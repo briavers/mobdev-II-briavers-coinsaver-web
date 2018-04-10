@@ -147,6 +147,7 @@ class PostForm extends Component {
                 name="category"
                 component={renderSelectField}
                 label="Category"
+                value={this.state.selectedCategoryId}
               >
                 { this.getCategoriesAsJSX() }
               </Field>
