@@ -9,7 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 /*
 Material UI
 */
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import './App.css';
 
 /*
@@ -38,12 +38,17 @@ if(auth) {
   store.dispatch({ type: UNAUTHENTICATED });
 }
 
+/*
+Theme
+*/
+const theme = createMuiTheme();
+
 class App extends Component {
   render() {    
     return (
       <Provider store={store}>
         <Router>
-          <MuiThemeProvider>
+          <MuiThemeProvider theme={theme}>
             <Main />
           </MuiThemeProvider>
         </Router>

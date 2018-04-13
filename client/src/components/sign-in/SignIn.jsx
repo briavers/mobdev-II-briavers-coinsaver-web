@@ -16,8 +16,14 @@ import { signInActionFacebookStrategy, signInActionLocalStrategy } from '../../a
 /*
 Material UI
 */
-import RaisedButton from 'material-ui/RaisedButton';
-import { renderTextField } from '../../utilities/ReduxFormToMaterialForm';
+import Button from 'material-ui/Button';
+import {
+  Checkbox,
+  RadioGroup,
+  Select,
+  TextField,
+  Switch,
+} from 'redux-form-material-ui'
 
 /*
 Configuration
@@ -73,25 +79,24 @@ class SignIn extends Component {
         <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-6">
           <form onSubmit={ handleSubmit(this.submit) } className="row">
             <div className="col-12">
-              <Field name="email"
-                      component="input"
-                      type="text"
-                      placeholder="Email" 
-                      component={renderTextField}
+              <Field name="email" 
+                      component={TextField}
+                      placeholder="Email"
                       fullWidth={true}
               />
             </div>
             <div className="col-12">
               <Field name="password" 
-                      component="input"
+                      component={TextField}
                       type="password"
                       placeholder="Password"
-                      component={renderTextField} 
                       fullWidth={true}
               />
             </div>
             <div className="col-12">
-              <RaisedButton type="submit" label="Sign In" primary={true} fullWidth={true} />
+              <Button type="submit" variant="raised" color="primary" fullWidth={true}>
+                Sign In
+              </Button>
             </div>
           </form>
           <div className="row">

@@ -40,16 +40,6 @@ export function signInActionFacebookStrategy(accessToken, history) {
       };
       const response = await fetch('/api/v1/auth/facebook', options);
       const responseJson = await response.json();
-      console.log(response);
-
-      /*
-      const token = r.headers.get('x-auth-token');
-      r.json().then(user => {
-        if (token) {
-          this.setState({isAuthenticated: true, user, token})
-        }
-      });
-      */
 
       dispatch({ 
         type: AUTHENTICATED,

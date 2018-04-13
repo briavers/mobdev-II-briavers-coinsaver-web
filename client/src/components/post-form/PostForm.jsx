@@ -15,9 +15,16 @@ import { createPost } from '../../actions/postActions';
 /*
 Material UI
 */
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
-import { renderTextField, renderSelectField } from '../../utilities/ReduxFormToMaterialForm';
+import { MenuItem, MenuList } from 'material-ui/Menu';
+import Button from 'material-ui/Button';
+import { FormControlLabel } from 'material-ui/Form'
+import {
+  Checkbox,
+  RadioGroup,
+  Select,
+  TextField,
+  Switch,
+} from 'redux-form-material-ui'
 
 /*
 Styles
@@ -65,6 +72,21 @@ class PostForm extends Component {
   }
 
   fetchPostCreateGet = () => {
+    fetch('/api/v1/posts/vm/create', {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(res => res.json())
+    .then(results =>
+      this.setState( {
+        categories: results.categories
+      })
+    );
+  }
+
+  fetchPostUpdateGet = () => {
     fetch('/api/v1/post', {
       method: 'GET',
       headers: {
@@ -111,49 +133,41 @@ class PostForm extends Component {
           <form onSubmit={ handleSubmit(this.submit) } className="row">
             <div className="col-12">
               <Field name="title"
-                      component="input"
-                      type="text"
-                      placeholder="Title" 
-                      component={renderTextField}
-                      fullWidth={true}
+                component={TextField}
+                placeholder="Title" 
+                fullWidth={true}
               />
             </div>
             <div className="col-12">
               <Field name="synopsis" 
-                      component="input"
-                      type="text"
+                      component={TextField}
                       placeholder="Synopsis"
-                      component={renderTextField} 
                       fullWidth={true}
-                      multiLine={true}
+                      multiline={true}
                       rows={2}
                       rowsMax={4}
               />
             </div>
             <div className="col-12">
               <Field name="body" 
-                      component="input"
+                      component={TextField}
                       type="text"
                       placeholder="Body"
-                      component={renderTextField} 
                       fullWidth={true}
-                      multiLine={true}
+                      multiline={true}
                       rows={8}
                       rowsMax={24}
               />
             </div>
             <div className="col-12">
-              <Field
-                name="category"
-                component={renderSelectField}
-                label="Category"
-                value={this.state.selectedCategoryId}
-              >
+              <Field name="category" component={Select} placeholder="Select a category">
                 { this.getCategoriesAsJSX() }
               </Field>
             </div>
             <div className="col-12">
-              <RaisedButton type="submit" label="Add post" primary={true} fullWidth={true} />
+              <Button type="submit" variant="raised" color="primary" fullWidth={true}>
+                Add post
+              </Button>
             </div>
           </form>
           <div className="row">
