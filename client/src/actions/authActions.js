@@ -1,6 +1,6 @@
 import { AUTHENTICATED, AUTHENTICATION_ERROR, UNAUTHENTICATED } from '../constants';
 import { checkAuth } from "../App";
-
+import swal from 'sweetalert'
 
 export function signInActionLocalStrategy({ email, password }, history) {
   return async (dispatch) => {
@@ -29,7 +29,7 @@ export function signInActionLocalStrategy({ email, password }, history) {
         type: AUTHENTICATION_ERROR,
         payload: 'Invalid email or password'
       });
-        alert('wrong email and or password')
+        swal("Oops!", "wrong email or password!", "error")
 
     }
       checkAuth();
@@ -60,12 +60,12 @@ export function signUpActionLocalStrategy({ email, password, }, history) {
       });
 
       if(response.json.code == 1100){
-        alert('user already exists')
+        swal("Oops!", "user already exists!", "error")
       }else{
         switch (responseStatus) {
           case 500:
             //console.log('something went ')
-            alert('wrong identification')
+           swal("Oops!", "wrong identification", "error")
             break;
         
           case 201:
@@ -79,7 +79,7 @@ export function signUpActionLocalStrategy({ email, password, }, history) {
             break;
         
         default:
-           alert('woops something went wrong try again later')
+           swal("Oops!", "something went terribly wrong, try again later", "error")
             break;
         }
       }

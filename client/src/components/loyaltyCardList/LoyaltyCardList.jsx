@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import ReactDOM from "react-dom";
+import Barcode from "react-barcode";
 /*
 Material UI
 */
@@ -14,12 +15,12 @@ Styles
 */
 const styles = {
   card: {
-    borderRadius: 10,
+    borderRadius: "10px 10px 0 0",
     boxShadow: 'none'
   },
   media: {
     height: 270,
-    borderRadius: 10,
+    borderRadius: "10px 10px 0 0",
   },
 };
 let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
@@ -84,6 +85,12 @@ class LoyaltyCardsList extends Component {
                   image={prefix + element.storeImg}
                   title="Contemplative Reptile"
                 />
+                <CardContent>
+                  <Typography gutterBottom variant="headline" component="h2">
+                    <Barcode value={element.code} marginLeft="50" />
+                  </Typography>
+
+                </CardContent>
                 <CardActions>
                 </CardActions>
               </Card>

@@ -104,7 +104,7 @@ const theme = createMuiTheme({
         boxShadow: 'none'
       },
       rounded: {
-       borderRadius: '10px'
+       borderRadius: '10px 10px 0 0'
       }
     },
     

@@ -6,7 +6,7 @@ Libraries
 */
 import { Field, reduxForm } from 'redux-form';
 import FacebookLogin from 'react-facebook-login';
-
+import swal from 'sweetalert'
 /*
 State management
 */
@@ -68,7 +68,7 @@ class SignUp extends Component {
       this.props.signUp(values, this.props.history);
       //console.log('there were errors')
     }else {
-      alert('passwords do not match')
+      swal("Oops!", "passwords don't match", "error")
       //console.log('no errors found', values)
     }
 
