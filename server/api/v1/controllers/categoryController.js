@@ -50,7 +50,7 @@ exports.category_create_get = function(req, res, next) {
 
 exports.category_create_category = function(req, res, next) {
   if(!req.body || !req.body.title || !req.body.description) {
-    console.log(req.body);
+    //console.log(req.body);
     return errorHandler.handleAPIError(400, `Category must have a title`, next);
 
   }
@@ -139,7 +139,7 @@ exports.category_softdelete_patch = function(req, res, next) {
       }
       res.send(category);
     }).catch(err => {
-      console.log(err);
+      //console.log(err);
       if(err.kind === 'ObjectId') {
         return errorHandler.handleAPIError(404, `Category not found with id: ${id}`, next);            
       }

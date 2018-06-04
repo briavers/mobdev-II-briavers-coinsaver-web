@@ -60,8 +60,21 @@ const validate = values => {
   })
   return errors;
 }
-
 let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
+let admin = false;
+let logginInUser = undefined;
+
+if (auth === null) {
+  window.href = './home'
+} else if (auth.user === null) {
+
+} else if (auth.user === undefined) {
+  admin = auth.isAdmin;
+  logginInUser = auth.id
+} else {
+  admin = auth.user.isAdmin;
+  logginInUser = auth.user.id;
+}
 
 class ExpenseForm extends Component {
   constructor(props) {
@@ -77,11 +90,9 @@ class ExpenseForm extends Component {
 
   submit = (values) => {
 
-    console.log('this was the submit ', values)
-    if(auth == null){
-      auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
-    } 
-    values.user = auth.user.id
+    //console.log('this was the submit ', values)
+
+    values.user = logginInUser
     this.props.createExpense(values, this.props.history);
   }
 
@@ -128,7 +139,7 @@ class ExpenseForm extends Component {
     if (this.state.billingAccounts) {
       typeElements = this.state.billingAccounts.map(
         (element) => {
-          if (element.user === auth.user.id ) {
+          if (element.user === logginInUser ) {
             return (
               <MenuItem value={element._id} key={element._id}>{element.title}</MenuItem>
             );

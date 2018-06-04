@@ -20,9 +20,21 @@ const styles = {
   },
 };
 let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
-if(auth === null){
-  window.href = './billingAccounts'
+let admin = false;
+let logginInUser = undefined;
+
+if (auth === null) {
+  window.href = './home'
+} else if ( auth.user === null ) {
+
+} else if (auth.user === undefined) {
+ admin = auth.isAdmin;
+  logginInUser = auth.id
+}else {
+  admin = auth.user.isAdmin;
+  logginInUser = auth.user.id;
 }
+
 
 class BillingAccountsList extends Component {
 
@@ -47,52 +59,58 @@ class BillingAccountsList extends Component {
   
   render() {
     let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
-    let logginInUser = auth.user.id
+   
     let prefix = "./billingAccounts/"
     const { classes } = this.props;
     if (this.state.tempBillingAccounts.length !== 0) {
-      
-       
       this.state.tempBillingAccounts.forEach(element => {
-        console.log(element);
+        console.log("element", element);
         if(element.user === logginInUser){
           this.state.billingAccounts.push(element);
         }
-        console.log(this.state.billingAccounts)
+        //console.log(this.state.billingAccounts)
       });
-
-      return (
-        <div className="row">
-          {this.state.billingAccounts.map((element, i) => (
-            
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" key={i}>
+      if (this.state.billingAccounts.length !== 0) { 
+        return (
+          <div className="row">
+            {this.state.billingAccounts.map((element, i) => (
               
-        
-              
-              <Card className={classes.card} key={ element._id }>
-                <CardMedia
-                  className={classes.media}
-                  image= {element._type.image}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="headline" component="h2">
-                    { element.title }
-                  </Typography>
-                  <Typography component="p">
-                    € { element.savings }
-                  </Typography>
-                  <Typography component="p">
-                    <a href=  {prefix + element._id }> test </a> 
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                </CardActions>
-              </Card>
-            </div>
-          ))}
-        </div>
-      );
+              <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" key={i}>
+                
+          
+                
+                <Card className={classes.card} key={ element._id }>
+                  <CardMedia
+                    className={classes.media}
+                    image= {element._type.image}
+                    title="Contemplative Reptile"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="headline" component="h2">
+                      { element.title }
+                    </Typography>
+                    <Typography component="p">
+                      € { element.savings }
+                    </Typography>
+                    <Typography component="p">
+                      <a href=  {prefix + element._id }> test </a> 
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                  </CardActions>
+                </Card>
+              </div>
+            ))}
+          </div>
+        );
+      } else {
+        return (
+          <div className='sorryDiv'>
+            <h2>sorry but you don't have any cards yet, </h2>
+            <h3> <a href="/billingAccount-create"> go make them at create billingAccount </a>  </h3>
+          </div>
+        )
+      }   
     } else {
       return (
         <div className='sorryDiv'>
@@ -100,7 +118,7 @@ class BillingAccountsList extends Component {
           <h3> <a href="/billingAccount-create"> go make them at create billingAccount </a>  </h3>
         </div>
       )
-    }   
+    }
   }
 }
 

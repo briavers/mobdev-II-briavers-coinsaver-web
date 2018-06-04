@@ -22,14 +22,14 @@ class LoyaltyCardPage extends Component {
   render() {
     return (
       <div>
-        <div className="container">
+
           <div className="row">
             <div className="col-12">
               <LoyaltyCardsList />
             </div>
           </div>
         </div>
-      </div>
+    
     )
   }
 }

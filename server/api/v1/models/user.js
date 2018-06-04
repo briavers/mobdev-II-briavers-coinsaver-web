@@ -12,7 +12,7 @@ const UserSchema = mongoose.Schema(
       match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     },
     isAdmin: { 
-      type: Boolean, required: true, default: false,
+      type: Boolean, required: true, default: false, unique: false
     },
     
     localProvider: {
@@ -81,9 +81,9 @@ UserSchema.statics.upsertFbUser = function(accessToken, refreshToken, profile, c
 
 UserSchema.methods.comparePassword = function(candidatePassword, cb) {
   const user = this;
-  console.log("in user we check user ", user.localProvider.password)
+  //console.log("in user we check user ", user.localProvider.password)
   bcrypt.compare(candidatePassword, user.localProvider.password, function (err, isMatch) {
-    console.log(err)
+    //console.log(err)
     if (err) { 
       return cb(err, null)
     }else{

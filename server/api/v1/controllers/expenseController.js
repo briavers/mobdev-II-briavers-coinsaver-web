@@ -27,7 +27,7 @@ exports.get_expense = function(req, res, next) {
   const id = req.params.expenseId;
   const query = Expense.findById(id).populate('_subCategory').populate('_billingAccount');
   query.exec((err, expense) => {
-    console.log(err)
+    //console.log(err)
     if (err) return errorHandler.handleAPIError(500, `Could not get the expense with id: ${id}`, next);
     if (!expense) {
       return errorHandler.handleAPIError(404, `Expense not found with id: ${id}`, next);
@@ -65,10 +65,10 @@ const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 
 exports.expense_create_expense = function(req, res, next) {
-  console.log("req.file");
-  console.log(req.file);
-  console.log("req.body");
-  console.log(req.body);
+  //console.log("req.file");
+  //console.log(req.file);
+  //console.log("req.body");
+  //console.log(req.body);
 
   if (!req.body || !req.body.title || !req.body.amount || !req.body.description || !req.body._subCategory || !req.body._billingAccount) {
     return errorHandler.handleAPIError(400, `Expense must have a title, amount, body and _category`, next);
@@ -85,11 +85,11 @@ exports.expense_create_expense = function(req, res, next) {
   }
   const expense = new Expense(newBody);
   expense.save((err, expense) => {
-    console.log('this is the expense', expense)
-    console.log('this is the error', err)
+    //console.log('this is the expense', expense)
+    //console.log('this is the error', err)
     if (err) return errorHandler.handleAPIError(500, `Could not save the new expense`, 'err', err, next);
-    console.log("err")
-    console.log(err)
+    //console.log("err")
+    //console.log(err)
     res.status(201).json(expense);
   });
 }
@@ -183,7 +183,7 @@ exports.expense_softdelete_patch = function(req, res, next) {
       }
       res.send(expense);
     }).catch(err => {
-      console.log(err);
+      //console.log(err);
       if(err.kind === 'ObjectId') {
         return errorHandler.handleAPIError(404, `Expense not found with id: ${id}`, next);            
       }

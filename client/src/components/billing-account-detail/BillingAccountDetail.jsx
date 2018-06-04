@@ -165,7 +165,7 @@ class BillingAccountDetail extends Component {
 
   getExpenseAsJSX() {
     let containerElement = '';
-    console.log(this.state.expenses)
+    //console.log(this.state.expenses)
 
     if (this.state.expenses) {
       containerElement = this.state.expenses.map((expense, index) => (
@@ -197,7 +197,7 @@ class BillingAccountDetail extends Component {
   render() {
     const { classes } = this.props;
     if(this.state.billingAccount) {
-      console.log(this.state.billingAccount)
+      //console.log(this.state.billingAccount)
       let element = this.state.billingAccount
 
       let prefix = "../"

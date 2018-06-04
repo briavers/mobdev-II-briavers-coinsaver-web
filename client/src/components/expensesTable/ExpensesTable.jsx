@@ -147,7 +147,7 @@ class BillingAccountsTable extends Component {
 
   getBillingAccountsAsJSX() {
     let containerElement = '';
-    console.log(this.state.billingAccounts)
+    //console.log(this.state.billingAccounts)
 
     if(this.state.billingAccounts) {
       containerElement = this.state.billingAccounts.map( (billingAccount, index) => (

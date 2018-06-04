@@ -147,7 +147,7 @@ class CategoriesTable extends Component {
 
   getCategoriesAsJSX() {
     let containerElement = '';
-    console.log(this.state.categories)
+    //console.log(this.state.categories)
 
     if(this.state.categories) {
       containerElement = this.state.categories.map( (category, index) => (

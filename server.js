@@ -35,7 +35,7 @@ const hostName = 'localhost';
 const port = '8080';
 const nodeEnv = (process.env.NODE_ENV)?process.env.NODE_ENV:'development';
 if(nodeEnv !== 'production') {
-    console.log('Do some development stuff!');
+    //console.log('Do some development stuff!');
 }
 
 /*
@@ -95,7 +95,7 @@ app.use((err, req, res, next) => {
 Launch server
 */
 server.listen(port, hostName, () => {
-    console.log(`Node server running at https://${hostName}:${port}/!`)
+    //console.log(`Node server running at https://${hostName}:${port}/!`)
 });
 
 

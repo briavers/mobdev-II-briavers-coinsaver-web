@@ -34,20 +34,20 @@ import { AUTHENTICATED, UNAUTHENTICATED } from './constants';
 let auth = localStorage.getItem('mobdev2_auth');
 let authParse = JSON.parse(auth)
 
-console.log('auth message', authParse)
+//console.log('auth message', authParse)
 
 export function checkAuth(){
 
   let auth = localStorage.getItem('mobdev2_auth');
-  console.log(auth)
+  //console.log(auth)
   const authParse = auth == null ? {message: "User Not Authenticated"} : JSON.parse(auth)
-  console.log('auth message', authParse)
+  //console.log('auth message', authParse)
   if (authParse.message !== "User Not Authenticated") {
   store.dispatch({ type: AUTHENTICATED, payload: JSON.parse(auth) });
-  console.log("user is AUTHENTICATED")
+  //console.log("user is AUTHENTICATED")
   } else {
     store.dispatch({ type: UNAUTHENTICATED });
-    console.log("user is NOT AUTHENTICATED")
+    //console.log("user is NOT AUTHENTICATED")
   }
 }
 checkAuth();

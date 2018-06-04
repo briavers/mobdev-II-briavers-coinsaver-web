@@ -28,16 +28,16 @@ Exported functions
 */
 module.exports = function() {  
   // Local strategy
-  console.log("using local login function")
+  //console.log("using local login function")
   const localStrategy = new LocalStrategy(
     {usernameField: "email", passwordField:"password"},
     
     function(username, password, done) {
- console.log("username in auth", username)
- console.log("password in auth", password)
+ //console.log("username in auth", username)
+ //console.log("password in auth", password)
       process.nextTick(function() {
         User.findOne({ 'email': username }, function (err, user) {
-          console.log("user in auth", user)
+          //console.log("user in auth", user)
           if (err) { 
             
             return done(err); 
@@ -47,25 +47,25 @@ module.exports = function() {
             return done(null, false); 
           
           }
-           console.log("in auth we continue" , password)
+           //console.log("in auth we continue" , password)
 
 
 
 
 
           user.comparePassword(password,  function(isMatch) {
-             console.log("in auth we check for a match")
+             //console.log("in auth we check for a match")
 
             
 
             if (!isMatch) {
-              console.log(isMatch)
-              console.log("is not a match")
+              //console.log(isMatch)
+              //console.log("is not a match")
               return done(null, false);
             }
-            console.log("is a match")
+            //console.log("is a match")
             return done(null, user);
-            console.log("is a match")
+            //console.log("is a match")
           });
         });
       });
@@ -75,7 +75,7 @@ module.exports = function() {
 
   // Jwt strategy
   const jwtStrategy = new JwtStrategy(jwtOptions, function(jwt_payload, done) {
-    console.log("jwtStategy")
+    //console.log("jwtStategy")
     const id = jwt_payload.id;
     User.findById(id, function(err, user) {
       if (err) { return done(err); }
@@ -92,7 +92,7 @@ module.exports = function() {
   },
   function (accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
-      console.log(profile);
+      //console.log(profile);
       User.upsertFbUser(accessToken, refreshToken, profile, function(err, user) {
         return done(err, user);
       });
@@ -112,7 +112,7 @@ module.exports = function() {
 
   return {
       initialize: function() {
-        console.log("initialize")
+        //console.log("initialize")
         return passport.initialize();
       },
       authenticateJwt: function() {

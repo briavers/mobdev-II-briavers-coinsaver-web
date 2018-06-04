@@ -39,9 +39,9 @@
 
 //   render() {
 //     const { classes } = this.props;
-//     console.log(this.state.expenses, "this are the expenses")
+//     //console.log(this.state.expenses, "this are the expenses")
 //     if (this.state.expenses.length !== 0) {
-//       console.log(this.state.expenses, "this are the expenses")
+//       //console.log(this.state.expenses, "this are the expenses")
 //       return (
 //         <div className="row">
 //           {this.state.expenses.map((element, i) => (
@@ -136,10 +136,20 @@ const styles = theme => ({
 });
 
 let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
-if (auth === null) {
-  window.href = './billingAccounts'
-}
+let admin = false;
+let logginInUser = undefined;
 
+if (auth === null) {
+  window.href = './home'
+} else if (auth.user === null) {
+
+} else if (auth.user === undefined) {
+  admin = auth.isAdmin;
+  logginInUser = auth.id
+} else {
+  admin = auth.user.isAdmin;
+  logginInUser = auth.user.id;
+}
 
 class ExpensesList extends Component {
 
@@ -249,21 +259,19 @@ class ExpensesList extends Component {
 
   getExpensesAsJSX() {
     let containerElement = '';
-    console.log(this.state.expenses);
+    //console.log(this.state.expenses);
 
-
-    let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
-    let logginInUser = auth.user.id
-    console.log("tempExpenses", this.state.tempExpenses)
+    let logginInUser = logginInUser
+    //console.log("tempExpenses", this.state.tempExpenses)
     if (this.state.tempExpenses.length !== 0) {
 
 
       this.state.tempExpenses.forEach(element => {
-        console.log(element);
+        //console.log(element);
         if (element.user === logginInUser) {
           this.state.expenses.push(element);
         }
-        console.log(this.state.expenses)
+        //console.log(this.state.expenses)
       });
     }
 

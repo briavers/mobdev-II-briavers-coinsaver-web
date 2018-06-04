@@ -54,7 +54,7 @@ exports.billingAccount_create_billingAccount = function(req, res, next) {
   const billingAccount = new BillingAccount(req.body);
   billingAccount.save((err, billingAccount) => {
     if (err) {
-      console.log("err", err); 
+      //console.log("err", err); 
       return errorHandler.handleAPIError(500, `Could not save the new billingAccount`, next);
   }
     res.status(201).json(billingAccount);
@@ -141,7 +141,7 @@ exports.billingAccount_softdelete_patch = function(req, res, next) {
       }
       res.send(billingAccount);
     }).catch(err => {
-      console.log(err);
+      //console.log(err);
       if(err.kind === 'ObjectId') {
         return errorHandler.handleAPIError(404, `BillingAccount not found with id: ${id}`, next);            
       }

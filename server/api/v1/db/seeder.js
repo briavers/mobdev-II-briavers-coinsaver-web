@@ -1,6 +1,6 @@
 
 
-// console.log('This script populates some test posts to your database. Specified database as argument - e.g.: seeder mongodb://your_username:your_password@your_dabase_url');
+// //console.log('This script populates some test posts to your database. Specified database as argument - e.g.: seeder mongodb://your_username:your_password@your_dabase_url');
 
 // /*
 // Cool programe
@@ -23,7 +23,7 @@
 // // Get arguments passed on command line
 // const userArgs = process.argv.slice(2);
 // if (!userArgs[0].startsWith('mongodb://')) {
-//   console.log('ERROR: You need to specify a valid mongodb URL as the first argument');
+//   //console.log('ERROR: You need to specify a valid mongodb URL as the first argument');
 //   return;
 // }
 
@@ -57,7 +57,7 @@
 //       cb(err, null);
 //       return;
 //     }
-//     console.log('New Blog: ' + blog);
+//     //console.log('New Blog: ' + blog);
 //     blogs.push(blog);
 //     cb(null, blog);
 //   });
@@ -72,7 +72,7 @@
 //       cb(err, null);
 //       return;
 //     }
-//     console.log('New category: ' + category);
+//     //console.log('New category: ' + category);
 //     categories.push(category);
 //     cb(null, category);
 //   });
@@ -87,7 +87,7 @@
 //       cb(err, null);
 //       return;
 //     }
-//     console.log('New Post: ' + post);
+//     //console.log('New Post: ' + post);
 //     posts.push(post)
 //     cb(null, post)
 //   });
@@ -174,7 +174,7 @@
 // ],
 // function(err, results) {
 //   if (err) {
-//     console.log(`FINAL ERR: ${err}`);
+//     //console.log(`FINAL ERR: ${err}`);
 //   }
 //   mongoose.connection.close();
 // });
@@ -193,7 +193,7 @@
 /*
 server seeding
 */
-console.log('This script populates some test imageSets to your database. Specified database as argument - e.g.: seeder mongodb://your_username:your_password@your_dabase_url');
+//console.log('This script populates some test imageSets to your database. Specified database as argument - e.g.: seeder mongodb://your_username:your_password@your_dabase_url');
 
 /*
 Cool programe
@@ -246,7 +246,7 @@ function imagesCreate(title, imgLink, imgSize, cb) {
       cb(err, null);
       return;
     }
-    console.log('New Image: ' + images);
+    //console.log('New Image: ' + images);
     images.push(images);
     cb(null, images);
   });
@@ -264,7 +264,7 @@ function subcategoryCreate(name, description, cb) {
       cb(err, null);
       return;
     }
-    console.log('New subcategory: ' + subcategory);
+    //console.log('New subcategory: ' + subcategory);
     subCategories.push(subcategory);
     cb(null, subcategory);
   });
@@ -285,7 +285,7 @@ function imageSetCreate(title, amount, body, thumbnailUrl, subcategoryId, cb) {
       cb(err, null);
       return;
     }
-    console.log('New ImageSet: ' + imageSet);
+    //console.log('New ImageSet: ' + imageSet);
     imageSets.push(imageSet)
     cb(null, imageSet)
   });
@@ -372,7 +372,7 @@ async.series([
   ],
   function (err, results) {
     if (err) {
-      console.log(`FINAL ERR: ${err}`);
+      //console.log(`FINAL ERR: ${err}`);
     }
     mongoose.connection.close();
   });

@@ -33,11 +33,13 @@ import config from '../../config';
 /*
 Validation
 */
+
 const validate = values => {
   const errors = {}
   const requiredFields = [
     'email',
-    'password'
+    'password',
+    'confirmPassword'
   ]
   requiredFields.forEach(field => {
     if (!values[field]) {
@@ -49,15 +51,30 @@ const validate = values => {
     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
   ) {
     errors.email = 'Invalid email address';
+    //console.log('this was the error')
+  }
+  if (
+
+    values.confirmPassword !== values.confirmPassword ) {
+    errors.password = 'the passwords where not identical';
   }
   return errors;
 }
 
 class SignUp extends Component {
+
   submit = (values) => {
-    this.props.signUp(values, this.props.history);
-    console.log(values)
-  }
+    if(this.props.errors){
+      //console.log('there were errors')
+    }else {
+      this.props.signUp(values, this.props.history);
+      //console.log('no errors found', values)
+    }
+
+
+  }  
+  
+  
 
   errorMessage() {
     if (this.props.error) {
@@ -135,10 +152,14 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, errors) => {
+
+  //console.log(errors, 'mapdispatcherrors')
   return {
     signUp: (values, history) => dispatch(signUpActionLocalStrategy(values, history) )
   };
+
+
 };
 
 const reduxFormSignUp = reduxForm({

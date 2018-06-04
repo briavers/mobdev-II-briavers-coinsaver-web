@@ -55,7 +55,7 @@ exports.loyaltyCard_create_loyaltyCard = function(req, res, next) {
 
   const loyaltyCard = new LoyaltyCard(req.body);
   loyaltyCard.save((err, loyaltyCard) => {
-    console.log(err)
+    //console.log(err)
     if (err) return errorHandler.handleAPIError(500, `Could not save the new loyaltyCard`, next);
     res.status(201).json(loyaltyCard);
   });
@@ -139,7 +139,7 @@ exports.loyaltyCard_softdelete_patch = function(req, res, next) {
       }
       res.send(loyaltyCard);
     }).catch(err => {
-      console.log(err);
+      //console.log(err);
       if(err.kind === 'ObjectId') {
         return errorHandler.handleAPIError(404, `LoyaltyCard not found with id: ${id}`, next);            
       }

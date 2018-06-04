@@ -54,8 +54,21 @@ const validate = values => {
   })
   return errors;
 }
-
 let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
+let admin = false;
+let logginInUser = undefined;
+
+if (auth === null) {
+  window.href = './home'
+} else if (auth.user === null) {
+
+} else if (auth.user === undefined) {
+  admin = auth.isAdmin;
+  logginInUser = auth.id
+} else {
+  admin = auth.user.isAdmin;
+  logginInUser = auth.user.id;
+}
 
 class BillingAccountForm extends Component {
   
@@ -64,13 +77,13 @@ class BillingAccountForm extends Component {
 
     this.state = {
       types: undefined,
-      user: auth.user.id
+      user: logginInUser
     }
   }
 
   submit = (values) => {
-    console.log(values)
-    values.user = auth.user.id
+    //console.log(values)
+    values.user = logginInUser
     this.props.createBillingAccount(values, this.props.history);
   }
 

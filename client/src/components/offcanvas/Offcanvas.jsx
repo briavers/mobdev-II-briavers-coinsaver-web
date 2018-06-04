@@ -47,11 +47,13 @@ let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
 let admin = false;
 
 if (auth === null) {
-  window.href = './billingAccounts'
+  window.href = './home'
 } else if ( auth.user === null ) {
 
-} else {
-  admin = auth.user.isAdmin
+} else if (auth.user === undefined) {
+ admin = auth.isAdmin;
+}else {
+  admin = auth.user.isAdmin;
 }
 
 
@@ -80,7 +82,7 @@ class Offcanvas extends Component {
 
   authLinks() {
     if (this.props.authenticated) {
-      console.log(this.props)
+      //console.log(this.props)
       return [
         <List key="0" component="nav">
 

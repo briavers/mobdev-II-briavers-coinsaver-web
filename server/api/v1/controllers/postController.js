@@ -138,7 +138,7 @@ exports.post_softdelete_patch = function(req, res, next) {
       }
       res.send(post);
     }).catch(err => {
-      console.log(err);
+      //console.log(err);
       if(err.kind === 'ObjectId') {
         return errorHandler.handleAPIError(404, `Post not found with id: ${id}`, next);            
       }

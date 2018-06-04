@@ -22,7 +22,21 @@ const styles = {
     borderRadius: 10,
   },
 };
+let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
+let admin = false;
+let logginInUser = undefined;
 
+if (auth === null) {
+  window.href = './home'
+} else if (auth.user === null) {
+
+} else if (auth.user === undefined) {
+  admin = auth.isAdmin;
+  logginInUser = auth.id
+} else {
+  admin = auth.user.isAdmin;
+  logginInUser = auth.user.id;
+}
 class LoyaltyCardsList extends Component {
 
   constructor(props) {
@@ -41,21 +55,16 @@ class LoyaltyCardsList extends Component {
   }
   
   render() {
-  
-  
-    let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
-    console.log('auth', auth)
-    let logginInUser = auth.user.id;
-    console.log(logginInUser)
+
     if (this.state.tempLoyaltyCards.length !== 0) {
 
 
       this.state.tempLoyaltyCards.forEach(element => {
-        console.log(element);
+        //console.log(element);
         if (element.user === logginInUser) {
           this.state.loyaltyCards.push(element);
         }
-        console.log("this.state.loyaltyCards", this.state.loyaltyCards)
+        //console.log("this.state.loyaltyCards", this.state.loyaltyCards)
       });
     }
   
@@ -63,7 +72,7 @@ class LoyaltyCardsList extends Component {
     let prefix = "./uploads/loyaltyCards/"
     const { classes } = this.props;
     if (this.state.loyaltyCards.length !== 0) {
-      console.log(this.state.loyaltyCards, "this are the loyaltyCard accounts")
+      //console.log(this.state.loyaltyCards, "this are the loyaltyCard accounts")
       return (
         <div className="row">
           {this.state.loyaltyCards.map((element, i) => (
@@ -85,7 +94,7 @@ class LoyaltyCardsList extends Component {
     } else {
       return (
         <div className='sorryDiv'>
-          <h2>sorry but you don't have any cards yet, </h2>
+          <h2>sorry but you don't have any loyalty cards yet, </h2>
           <h3> <a href="/loyaltyCard-create"> go make them at create loyaltyCard </a>  </h3>
         </div>
       )

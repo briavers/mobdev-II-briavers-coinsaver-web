@@ -8,26 +8,32 @@ const config = require('../../../config/config');
 
 exports.user_create_post = function(req, res, next) {
 
-  console.log('user_create_post')
+  //console.log('user_create_post')
   const user = new User(req.body);
   user.save((err, post) => {
-    console.log(err)
-    if (err) return next(err);
-    res.status(201).json(user);
+    //console.log("err in controller", err)
+    if (err){
+      return next(err);
+    } else {
+      res.status(201).json(user);
+    }
+    
+  
+  
   });
-  console.log(user)
-  console.log(user.id);
-  console.log(user.email);
-  console.log(user.localProvider.password);
+  //console.log(user)
+  //console.log(user.id);
+  //console.log(user.email);
+  //console.log(user.localProvider.password);
   
 }
 
 exports.user_auth_local_post = function(req, res, next) {
   passport.authenticate('local', config.jwtSession, function (err, user, info) {
     
-    console.log("user", user);
-    console.log("info", info);
-    console.log("err", err);
+    //console.log("user", user);
+    //console.log("info", info);
+    //console.log("err", err);
     if (err) { return next(err); }
     if (!user) { 
       return res.status(401).json({
