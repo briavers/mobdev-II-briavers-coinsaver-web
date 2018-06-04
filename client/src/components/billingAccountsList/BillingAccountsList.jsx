@@ -66,16 +66,39 @@ class BillingAccountsList extends Component {
     this.state.billingAccounts = []
     if (this.state.tempBillingAccounts.length !== 0) {
       this.state.tempBillingAccounts.forEach(element => {
-        console.log("element", element);
+       // console.log("element", element);
         if(element.user === logginInUser){
           this.state.billingAccounts.push(element);
         }
-        //console.log(this.state.billingAccounts)
+        console.log(this.state.billingAccounts)
+
+
+
+
+        this.state.billingAccounts.forEach(element => {
+          let totalCostSom = 0;
+          element.expenses.forEach(elementExpense => {
+
+
+            let amount = elementExpense.amount;
+            totalCostSom += amount;
+            console.log(totalCostSom)
+          });
+          element.debt = totalCostSom
+        });
+        
+        
+
+
+
       });
       if (this.state.billingAccounts.length !== 0) { 
+        console.log('billingAccounts', this.state.billingAccounts)
         return (
           <div className="row">
             {this.state.billingAccounts.map((element, i) => (
+              
+
               
               <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" key={i}>
                 
@@ -92,7 +115,7 @@ class BillingAccountsList extends Component {
                       { element.title }
                     </Typography>
                     <Typography component="p">
-                      € { element.savings }
+                      € { element.savings - element.debt }
                     </Typography>
                   </CardContent>
                   <CardActions>

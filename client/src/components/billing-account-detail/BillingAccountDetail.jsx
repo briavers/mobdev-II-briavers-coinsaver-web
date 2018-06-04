@@ -194,16 +194,30 @@ class BillingAccountDetail extends Component {
     return containerElement;
   }
 
+
+
+
   render() {
     const { classes } = this.props;
+
+
+
     if(this.state.billingAccount) {
       //console.log(this.state.billingAccount)
       let element = this.state.billingAccount
+      let totalCostSom = 0;
+      element.expenses.forEach(elementExpense => {
+
+
+            let amount = elementExpense.amount;
+            totalCostSom += amount;
+            console.log(totalCostSom)
+      });
+      
+      element.debt = totalCostSom
+      console.log("element ", element)
 
       let prefix = "../"
-
-
-
 
 
 
@@ -217,7 +231,7 @@ class BillingAccountDetail extends Component {
                   </div>
                     <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
                   <div className="cardInformation"> 
-                    <p> {element.title} <br /> € {element.savings} </p>
+                    <p> {element.title} <br /> €  {element.savings - element.debt} </p>
                   </div>
                 </div>
 
@@ -243,7 +257,7 @@ class BillingAccountDetail extends Component {
                 <img src={prefix + element._type.image} alt="picture of the card" className="cardImage" />
               </div>
               <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div className="cardInformation"> <p> {element.title} <br /> € {element.savings} </p></div>
+                <div className="cardInformation"> <p> {element.title} <br /> € {element.savings - element.debt} </p></div>
               </div>
 
               

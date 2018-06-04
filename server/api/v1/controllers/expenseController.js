@@ -84,6 +84,7 @@ exports.expense_create_expense = function(req, res, next) {
     user: req.body.user
 
   }
+  
   const expense = new Expense(newBody);
   expense.save((err, expense) => {
     //console.log('this is the expense', expense)
@@ -93,7 +94,25 @@ exports.expense_create_expense = function(req, res, next) {
     //console.log(err)
     res.status(201).json(expense);
   });
+
+
+  //take the money of the card
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
 
 
 
