@@ -70,26 +70,15 @@ class BillingAccountsList extends Component {
         if(element.user === logginInUser){
           this.state.billingAccounts.push(element);
         }
-        console.log(this.state.billingAccounts)
-
-
-
-
         this.state.billingAccounts.forEach(element => {
           let totalCostSom = 0;
           element.expenses.forEach(elementExpense => {
-
-
             let amount = elementExpense.amount;
             totalCostSom += amount;
             console.log(totalCostSom)
           });
           element.debt = totalCostSom
         });
-        
-        
-
-
 
       });
       if (this.state.billingAccounts.length !== 0) { 

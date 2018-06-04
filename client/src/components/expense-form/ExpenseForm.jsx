@@ -153,7 +153,7 @@ class ExpenseForm extends Component {
   getSubCategoriesAsJSX = () => {
     let typeElements = '';
     if (this.state.subCategories) {
-      console.log(this.state.subCategories)
+
       typeElements = this.state.subCategories.map(
         (element) => {
           if (element.deleted_at === null || element.deleted_at === undefined){

@@ -203,7 +203,7 @@ class BillingAccountDetail extends Component {
 
 
     if(this.state.billingAccount) {
-      //console.log(this.state.billingAccount)
+
       let element = this.state.billingAccount
       let totalCostSom = 0;
       element.expenses.forEach(elementExpense => {
@@ -211,7 +211,7 @@ class BillingAccountDetail extends Component {
 
             let amount = elementExpense.amount;
             totalCostSom += amount;
-            console.log(totalCostSom)
+
       });
       
       element.debt = totalCostSom

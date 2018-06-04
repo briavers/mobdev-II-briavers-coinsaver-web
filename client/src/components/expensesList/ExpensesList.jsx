@@ -303,15 +303,13 @@ class ExpensesList extends Component {
   render() {
 
 
-    console.log("this.state.tempExpenses", this.state.tempExpenses);
+
       if (this.state.tempExpenses.length !== 0) {
         this.state.tempExpenses.forEach(element => {
-          console.log("we check an element", element);
-          console.log("we check an element", logginInUser);
+
           if (element.user === logginInUser) {
             this.state.expenses.push(element);
           }
-          console.log(" this state expenses", this.state.expenses)
         });
       }
     

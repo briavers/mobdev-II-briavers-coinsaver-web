@@ -14,14 +14,10 @@ export function signInActionLocalStrategy({ email, password }, history) {
       };
       const response = await fetch('/api/v1/auth/local', options);
       const responseJson = await response.json();
-    
       dispatch({ 
         type: AUTHENTICATED,
         payload: responseJson
       });
-
-
-
       localStorage.setItem('mobdev2_auth', JSON.stringify(responseJson));
       window.location.href = '/billingAccounts';
     } catch(error) {
@@ -30,12 +26,9 @@ export function signInActionLocalStrategy({ email, password }, history) {
         payload: 'Invalid email or password'
       });
         swal("Oops!", "wrong email or password!", "error")
-
     }
       checkAuth();
-      //console.log("auth checked")
   };
-
 }
 
 export function signUpActionLocalStrategy({ email, password, }, history) {
@@ -49,27 +42,20 @@ export function signUpActionLocalStrategy({ email, password, }, history) {
           cache: 'default'
       };
       const response = await fetch('/api/v1/signup', options);
-      //console.log(options)
       const responseJson = await response.json();
       const responseStatus = response.status
-
-      //console.log("responseJson", response.status)
       dispatch({ 
         type: AUTHENTICATED,
         payload: responseJson
       });
-
       if(response.json.code == 1100){
         swal("Oops!", "user already exists!", "error")
       }else{
         switch (responseStatus) {
           case 500:
-            //console.log('something went ')
            swal("Oops!", "wrong identification", "error")
             break;
-        
           case 201:
-            //console.log('everything went fine  ');
           dispatch({
             type: AUTHENTICATED,
             payload: responseJson
@@ -77,15 +63,11 @@ export function signUpActionLocalStrategy({ email, password, }, history) {
           window.location.href="/billingAccounts"
           localStorage.setItem('mobdev2_auth', JSON.stringify(responseJson));
             break;
-        
         default:
            swal("Oops!", "something went terribly wrong, try again later", "error")
             break;
         }
       }
-      
-      //console.log(responseJson)
-      
     } catch(error) {
       dispatch({
         type: AUTHENTICATION_ERROR,
@@ -97,8 +79,6 @@ export function signUpActionLocalStrategy({ email, password, }, history) {
     }
   };
 }
-
-
 
 export function signInActionFacebookStrategy(accessToken, history) {
   return async (dispatch) => {
