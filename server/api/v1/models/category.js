@@ -3,13 +3,12 @@ const Schema = mongoose.Schema;
 
 const CategorySchema = new Schema(
   {
-    name: { type: String, required: true, max: 128 },
-    description: { type: String, required: true, max: 256 },
+    title: { type: String, required: true },
+    description: { type: String, required: true},
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
     deleted_at: { type: Date, required: false },
-    published_at: { type: Date, required: false },
-    _parentCategory: { type: Schema.Types.ObjectId, ref: 'Category', required: false}
+    _subcategories: [{type: Schema.Types.ObjectId, ref: 'SubCategories', required: false}]
   },
   {
     toJSON: { virtuals: true },
@@ -30,10 +29,13 @@ CategorySchema.virtual('posts', {
   foreignField: '_category',
   justOne: false
 });
+
+
+
 CategorySchema.virtual('subCategories', {
-  ref: 'Category',
+  ref: 'SubCategory',
   localField: '_id',
-  foreignField: '_parentCategory',
+  foreignField: '_category',
   justOne: false
 });
 

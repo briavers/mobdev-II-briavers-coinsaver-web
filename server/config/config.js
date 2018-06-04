@@ -1,6 +1,6 @@
 module.exports = {
   'database': {
-    'connectionString': 'mongodb://mobdev2:wickedman@ds211289.mlab.com:11289/mobdev2'
+    'connectionString': 'mongodb://rootcoinsaver:secret@ds219130.mlab.com:19130/coinsaver'
   },
   'auth': {
     'bcrypt': {
@@ -8,11 +8,11 @@ module.exports = {
     },
     'jwtSecret': 'mobdev2_nmd_gdm',
     'jwtSession': {
-        session: false
+        session: true
     },
     'facebook': {
-      'clientID': '2046607362295127',
-      'clientSecret': 'dcae5fd188aa74d6e552f9aad0595c32'
+      'clientID': '148934219295666',
+      'clientSecret': 'e7cbc584bb29cc4f4649bf7e1faf62d5'
     }
   }  
 };

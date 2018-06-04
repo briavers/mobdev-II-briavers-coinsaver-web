@@ -1,2 +1,32 @@
 /*
 */
+h1, 
+h2{
+  font-weight: normal;
+}
+h1{
+  font-size: 7em;
+}
+h2{
+  font-size: 4em;
+  line-height: 0px; 
+  margin-top: -50px;
+}
+
+.logoHomePage img{
+  width: 225px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 50px;
+}
+.logoHomePage h2{
+ 
+  margin: 0 auto;
+  margin-top: 25px;
+
+}
+.MainPageMainDiv{
+  //align-content: center;
+  text-align: center;
+  
+}

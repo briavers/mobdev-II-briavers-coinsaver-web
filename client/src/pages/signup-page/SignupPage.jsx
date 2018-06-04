@@ -8,7 +8,7 @@ Material UI
 /*
 Components
 */
-
+import SignUp from "../../components/sign-up/SignUp";
 /*
 Component styles
 */
@@ -22,8 +22,10 @@ class SignupPage extends Component {
   render() {
     return (
       <div>
-        <div className="c-max">
-          
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+            <SignUp />
+          </div>
         </div>
       </div>
     )

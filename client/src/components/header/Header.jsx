@@ -17,7 +17,7 @@ Material UI
 */
 import { withStyles } from 'material-ui/styles';
 import Menu, { MenuItem, MenuList } from 'material-ui/Menu';
-import Button from 'material-ui/Button';
+//import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -138,3 +138,24 @@ const mapDispatchToProps = (dispatch) => {
 
 const HeaderWithStyles = withStyles(styles, { withTheme: true })(Header);
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderWithStyles);
+
+
+
+
+
+// <AppBar className={classes.appBar}>
+//   <Toolbar>
+//     <IconButton
+//       color="inherit"
+//       aria-label="open drawer"
+//       onClick={this.handleDrawerToggle}
+//       className={classes.navIconHide}
+//     >
+//       <MenuIcon />
+//     </IconButton>
+//     <Typography variant="title" color="inherit" noWrap>
+//       Responsive drawer
+//             </Typography>
+//   </Toolbar>
+// </AppBar>
+

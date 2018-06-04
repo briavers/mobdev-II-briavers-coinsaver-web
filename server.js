@@ -13,6 +13,7 @@ const app = express();
 const mongoose = require('mongoose');
 const auth = require('./server/api/v1/providers/auth')();
 
+
 /*
 Custom Routes
 */
@@ -40,7 +41,7 @@ if(nodeEnv !== 'production') {
 /*
 Mongoose (MongoDb-port)
 */
-const mongoDbConnectionString = 'mongodb://mobdev2:wickedman@ds211289.mlab.com:11289/mobdev2';
+const mongoDbConnectionString = 'mongodb://rootcoinsaver:secret@ds219130.mlab.com:19130/coinsaver';
 mongoose.connect(mongoDbConnectionString);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
@@ -66,6 +67,11 @@ app.use(auth.initialize());
 Express.js settings
 */
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+//https://localhost:8080/uploads/y2018m5d1h17m54s41smallPhotoGoogle.jpg
+
+app.use('/uploads', express.static(path.join(__dirname, './uploads')))
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -84,9 +90,12 @@ app.use((err, req, res, next) => {
     });
 });
 
+
 /*
 Launch server
 */
 server.listen(port, hostName, () => {
     console.log(`Node server running at https://${hostName}:${port}/!`)
 });
+
+

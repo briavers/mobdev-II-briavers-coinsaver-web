@@ -43,6 +43,19 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar,
 });
 
+let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
+let admin = false;
+
+if (auth === null) {
+  window.href = './billingAccounts'
+} else if ( auth.user === null ) {
+
+} else {
+  admin = auth.user.isAdmin
+}
+
+
+
 class Offcanvas extends Component {
 
   constructor(props) {
@@ -67,15 +80,46 @@ class Offcanvas extends Component {
 
   authLinks() {
     if (this.props.authenticated) {
+      console.log(this.props)
       return [
         <List key="0" component="nav">
+
           <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/">
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/posts">
-            <ListItemText primary="News" />
-          </ListItem>
+
+
           <Divider />
+
+          <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/billingAccounts">
+            <ListItemText primary="Billing Accounts" />
+          </ListItem>
+
+          <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/billingAccount-create">
+            <ListItemText primary="Create a billing account" />
+          </ListItem>
+
+          <Divider />
+
+          <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/expenses">
+            <ListItemText primary="Expenses" />
+          </ListItem>
+
+          <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/expense-create">
+            <ListItemText primary="Create an expense" />
+          </ListItem>
+
+          <Divider />
+
+          <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/loyaltyCards">
+            <ListItemText primary="loyalty Cards" />
+          </ListItem>
+          <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/loyaltyCard-create">
+            <ListItemText primary="Create a loyalty card" />
+          </ListItem>
+
+          <Divider />
+
           <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/signout">
             <ListItemText primary="Sign out" />
           </ListItem>
@@ -86,9 +130,6 @@ class Offcanvas extends Component {
       <List key="0" component="nav">
         <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/">
           <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/posts">
-          <ListItemText primary="News" />
         </ListItem>
         <Divider />
         <ListItem button onClick={() => this.props.closeClick()} component={Link} to="/signin">
@@ -102,13 +143,17 @@ class Offcanvas extends Component {
   }
 
   backofficeLinks() {
-    if (this.props.authenticated) {
+    if (admin) {
       return [
-        <List 
-        key={0}
-        subheader={<ListSubheader component="div">Backoffice</ListSubheader>}
-        component="nav"
+        <List
+          key={0}
+          subheader={<ListSubheader component="div">Backoffice</ListSubheader>}
+          component="nav"
         >
+
+
+
+
           <ListItem
             button
             onClick={() => this.toggleBackofficeLists('postsOpen')}
@@ -119,38 +164,98 @@ class Offcanvas extends Component {
             <ListItemText inset primary="Posts" />
             {this.state.backofficeLists.postsOpen ? <IconExpandLess /> : <IconExpandMore />}
           </ListItem>
-          <Collapse in={this.state.backofficeLists.postsOpen} timeout="auto" unmountOnExit>
+         
+          <ListItem
+            button
+            onClick={() => this.toggleBackofficeLists('categoriesOpen')}
+          >
+            <ListItemIcon>
+              <IconDescription />
+            </ListItemIcon>
+            <ListItemText inset primary="Categories" />
+            {this.state.backofficeLists.categoriesOpen ? <IconExpandLess /> : <IconExpandMore />}
+          </ListItem>
+          <Collapse in={this.state.backofficeLists.categoriesOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItem
                 key={"1"}
                 button
                 onClick={() => this.props.closeClick()}
-                component={Link} 
-                to="/backoffice/posts-table"
+                component={Link}
+                to="/backoffice/categories-table"
               >
                 <ListItemIcon>
                   <IconList />
                 </ListItemIcon>
-                <ListItemText inset primary="All posts" />
+                <ListItemText inset primary="All categories" />
               </ListItem>
               <ListItem
                 key={"2"}
                 button
                 onClick={() => this.props.closeClick()}
-                component={Link} 
-                to="/backoffice/post-create"
+                component={Link}
+                to="/backoffice/category-create"
               >
                 <ListItemIcon>
                   <IconModeEdit />
                 </ListItemIcon>
-                <ListItemText inset primary="Create post" />
+                <ListItemText inset primary="Create category" />
               </ListItem>
             </List>
           </Collapse>
+
+
+
+
+
+          <ListItem
+            button
+            onClick={() => this.toggleBackofficeLists('subCategoriesOpen')}
+          >
+            <ListItemIcon>
+              <IconDescription />
+            </ListItemIcon>
+            <ListItemText inset primary="SubCategories" />
+            {this.state.backofficeLists.subCategoriesOpen ? <IconExpandLess /> : <IconExpandMore />}
+          </ListItem>
+          <Collapse in={this.state.backofficeLists.subCategoriesOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem
+                key={"1"}
+                button
+                onClick={() => this.props.closeClick()}
+                component={Link}
+                to="/backoffice/sub-categories-table"
+              >
+                <ListItemIcon>
+                  <IconList />
+                </ListItemIcon>
+                <ListItemText inset primary="All subCategories" />
+              </ListItem>
+              <ListItem
+                key={"2"}
+                button
+                onClick={() => this.props.closeClick()}
+                component={Link}
+                to="/backoffice/sub-category-create"
+              >
+                <ListItemIcon>
+                  <IconModeEdit />
+                </ListItemIcon>
+                <ListItemText inset primary="Create subCategory" />
+              </ListItem>
+            </List>
+          </Collapse>
+
+
+
+
+
+
           <ListItem
             button
             onClick={() => this.props.closeClick()}
-            component={Link} 
+            component={Link}
             to="/404"
           >
             <ListItemIcon>
@@ -161,6 +266,8 @@ class Offcanvas extends Component {
         </List>,
       ];
     }
+
+
     return [];
   }
 
@@ -170,7 +277,8 @@ class Offcanvas extends Component {
     return (
       <Drawer
         anchor="left"
-        open={this.props.offcanvasOpened}
+        open= "true"
+        variant= "permanent"
         onClose={(open) => this.props.closeClick()}
         classes={{
           paper: classes.drawerPaper,

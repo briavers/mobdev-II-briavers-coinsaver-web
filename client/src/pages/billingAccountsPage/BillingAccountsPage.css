@@ -1,0 +1,16 @@
+/*
+*/
+.col-12 {
+  margin-top: 25px; }
+
+.sorryDiv {
+  margin: 0 auto;
+  align-content: center; }
+
+.sorryDiv h2,
+.sorryDiv h3 {
+  text-align: center; }
+
+.sorryDiv a {
+  color: #F4BF19;
+  text-decoration: none; }

@@ -2,7 +2,7 @@
 import { CLOSE_OFFCANVAS, OPEN_OFFCANVAS, TOGGLE_OFFCANVAS} from '../constants';
 
 const initialState = {
-  offcanvasOpened: false
+  offcanvasOpened: true
 }
 
 function offcanvasReducer(state = initialState, action) {

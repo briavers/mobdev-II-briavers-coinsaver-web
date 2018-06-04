@@ -76,9 +76,10 @@ class SignIn extends Component {
     const { handleSubmit } = this.props;
     return (
       <div className="row">
-        <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-6">
+        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
           <form onSubmit={ handleSubmit(this.submit) } className="row">
             <div className="col-12">
+              <label htmlFor="email">emails</label>
               <Field name="email" 
                       component={TextField}
                       placeholder="Email"
@@ -86,6 +87,7 @@ class SignIn extends Component {
               />
             </div>
             <div className="col-12">
+              <label htmlFor="password">password</label>
               <Field name="password" 
                       component={TextField}
                       type="password"
@@ -94,7 +96,7 @@ class SignIn extends Component {
               />
             </div>
             <div className="col-12">
-              <Button type="submit" variant="raised" color="primary" fullWidth={true}>
+              <Button className="buttonYellow" type="submit" color="custom" fullWidth={true}>
                 Sign In
               </Button>
             </div>
