@@ -135,7 +135,7 @@ class SubCategoryForm extends Component {
           <form onSubmit={ handleSubmit(this.submit) } className="row">
             
             <div className="col-12">
-              <label>Name for the subCategory</label>
+              <label>Name</label>
               <Field name="title"
                 component={TextField}
                 placeholder="Title" 
@@ -156,11 +156,12 @@ class SubCategoryForm extends Component {
             </div>
             
             <div className="col-12">
-              <label>parent category</label>
-              <Field className="ajaxField" name="category" component={Select} placeholder="Select a category" fullWidth={true}>
+              <label className='ajaxLabel'>parent category</label>
+              <Field className="ajaxField ajaxFieldSelectParentCategory" id='ajaxFieldSelectParentCategory' name="category" component={Select} placeholder="Select a category" fullWidth={true}>
                 { this.getCategoriesAsJSX() }
               </Field>
             </div>
+
             <div className="col-12">
               <Button type="submit" variant="raised" color="primary" fullWidth={true}>
                 Add subCategory

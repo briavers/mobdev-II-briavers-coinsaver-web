@@ -120,7 +120,7 @@ Component styles
 */
 import './ExpensesList.css';
 
-const SUBCATEGORYACTIONSENUM = Enum('DELETE', 'SOFTDELETE', 'SOFTUNDELETE');
+const EXPENSEACTIONSENUM = Enum('DELETE', 'SOFTDELETE', 'SOFTUNDELETE');
 
 /*
 Styles
@@ -137,7 +137,7 @@ const styles = theme => ({
 
 let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
 let admin = false;
-let logginInUser = undefined;
+let logginInUser;
 
 if (auth === null) {
   window.href = './home'
@@ -172,15 +172,15 @@ class ExpensesList extends Component {
     let message = '';
 
     switch (expenseAction) {
-      case SUBCATEGORYACTIONSENUM.DELETE:
+      case EXPENSEACTIONSENUM.DELETE:
         title = 'Delete from the database?';
         message = `Do you wish permenantly delete the expense with id ${expenseId}?`;
         break;
-      case SUBCATEGORYACTIONSENUM.SOFTDELETE:
+      case EXPENSEACTIONSENUM.SOFTDELETE:
         title = 'Soft-delete from the database?';
         message = `Do you wish to soft-delete the expense with id ${expenseId}?`;
         break;
-      case SUBCATEGORYACTIONSENUM.SOFTUNDELETE:
+      case EXPENSEACTIONSENUM.SOFTUNDELETE:
         title = 'Soft-undelete from the database?';
         message = `Do you wish to soft-undelete the expense with id ${expenseId}?`;
         break;
@@ -204,23 +204,26 @@ class ExpensesList extends Component {
     let options = {};
 
     switch (this.state.expenseAction) {
-      case SUBCATEGORYACTIONSENUM.DELETE:
+      case EXPENSEACTIONSENUM.DELETE:
         url = `/api/v1/expenses/${this.state.expenseId}`;
         options = {
           method: 'DELETE'
         }
+        window.location.href ='expenses'
         break;
-      case SUBCATEGORYACTIONSENUM.SOFTDELETE:
+      case EXPENSEACTIONSENUM.SOFTDELETE:
         url = `/api/v1/expenses/${this.state.expenseId}/softdelete`;
         options = {
           method: 'PATCH'
         }
+        window.location.href = 'expenses'
         break;
-      case SUBCATEGORYACTIONSENUM.SOFTUNDELETE:
+      case EXPENSEACTIONSENUM.SOFTUNDELETE:
         url = `/api/v1/expenses/${this.state.expenseId}/softundelete`;
         options = {
           method: 'PATCH'
         }
+        window.location.href = 'expenses'
         break;
     }
 
@@ -252,28 +255,36 @@ class ExpensesList extends Component {
   }
 
   loadTempExpenses = () => {
-    fetch('/api/v1/expenses')
-      .then(response => response.json())
-      .then(item => this.setState({ tempExpenses: item }));
+    if(this.state.tempExpenses.length>0){
+      console.log('this was the case')
+    }else {
+      fetch('/api/v1/expenses')
+        .then(response => response.json())
+        .then(item => this.setState({ tempExpenses: item }));
+    }
+
   }
 
   getExpensesAsJSX() {
     let containerElement = '';
     //console.log(this.state.expenses);
-
-    let logginInUser = logginInUser
-    //console.log("tempExpenses", this.state.tempExpenses)
+    if (this.state.expenses.length > 0) {
+      console.log('this was the case')
+    } else {
+    console.log("tempExpenses", this.state.tempExpenses)
     if (this.state.tempExpenses.length !== 0) {
 
 
       this.state.tempExpenses.forEach(element => {
-        //console.log(element);
+        console.log("we check an element", element );
+        console.log("we check an element", logginInUser );
         if (element.user === logginInUser) {
           this.state.expenses.push(element);
         }
-        //console.log(this.state.expenses)
+        console.log(" this state expenses",this.state.expenses)
       });
     }
+  }
 
 
 
@@ -290,15 +301,15 @@ class ExpensesList extends Component {
             <TableCell>{expense.created_at}</TableCell>
             <TableCell>
               <IconButton
-                component={Link} to={'/backoffice/expense-create?id=' + expense._id}>
+                component={Link} to={'/expense-create?id=' + expense._id}>
                 <IconCreate />
               </IconButton>
               <IconButton
-                onClick={() => this.handleDialogOpen(expense._id, (expense.deleted_at) ? SUBCATEGORYACTIONSENUM.SOFTUNDELETE : SUBCATEGORYACTIONSENUM.SOFTDELETE)} style={{ opacity: ((expense.deleted_at) ? 0.3 : 1) }}>
+                onClick={() => this.handleDialogOpen(expense._id, (expense.deleted_at) ? EXPENSEACTIONSENUM.SOFTUNDELETE : EXPENSEACTIONSENUM.SOFTDELETE)} style={{ opacity: ((expense.deleted_at) ? 0.3 : 1) }}>
                 <IconDelete />
               </IconButton>
               <IconButton
-                onClick={() => this.handleDialogOpen(expense._id, SUBCATEGORYACTIONSENUM.DELETE)}>
+                onClick={() => this.handleDialogOpen(expense._id, EXPENSEACTIONSENUM.DELETE)}>
                 <IconDeleteForever />
               </IconButton>
             </TableCell>
@@ -311,47 +322,55 @@ class ExpensesList extends Component {
 
   render() {
    // const { classes } = this.props;
-
-    return (
-      <div>
-        <Table className="thead" >
-          <TableHead>
-            <TableRow>
-              <TableCell>Image</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>amount</TableCell>
-              <TableCell>Discription</TableCell>
-              <TableCell>Created</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.getExpensesAsJSX()}
-          </TableBody>
-        </Table>
-        <Dialog
-          fullScreen={false}
-          open={this.state.dialogOpen}
-          onClose={this.handleDialogClose}
-          aria-labelledby="responsive-dialog-title"
-        >
-          <DialogTitle id="responsive-dialog-title">{this.state.dialogTitle}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              {this.state.dialogMessage}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => this.handleDialogClose()} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={() => this.handleDialogSubmit()} color="primary" autoFocus>
-              Submit
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    )
+    if(this.state.expenses > 0 ) {
+      return (
+        <div>
+          <Table className="thead" >
+            <TableHead>
+              <TableRow>
+                <TableCell>Image</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>amount</TableCell>
+                <TableCell>Discription</TableCell>
+                <TableCell>Created</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.getExpensesAsJSX()}
+            </TableBody>
+          </Table>
+          <Dialog
+            fullScreen={false}
+            open={this.state.dialogOpen}
+            onClose={this.handleDialogClose}
+            aria-labelledby="responsive-dialog-title"
+          >
+            <DialogTitle id="responsive-dialog-title">{this.state.dialogTitle}</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {this.state.dialogMessage}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => this.handleDialogClose()} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={() => this.handleDialogSubmit()} color="primary" autoFocus>
+                Submit
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
+      )
+    }else {
+      return (
+        <div className='sorryDiv'>
+          <h2>sorry but you don't have any expenses yet, </h2>
+          <h3> <a href="/expense-create"> go make them at create an expenses </a>  </h3>
+        </div>
+      )
+    }
   }
 }
 

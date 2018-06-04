@@ -63,6 +63,10 @@ const theme = createMuiTheme({
         '&:hover': {
           backgroundColor: '#F4B219', // Some CSS
         }          
+      },
+      raisedPrimary : {
+        backgroundColor: '#F4BF19',
+        marginTop: '2%',
       }
     }, 
     MuiInput: {
@@ -81,9 +85,8 @@ const theme = createMuiTheme({
 
       },
       fullWidth: {
-        position: 'relative',
-        left: '15%',
-        width: '85%' ,
+        alignSelf: 'end',
+        width: '70%',
 
 
       }
@@ -108,7 +111,7 @@ const theme = createMuiTheme({
     MuiTypography: {
       subheading: { // Name of the rule
           color: 'white',
-          backgroundColor: 'transparant',
+          backgroundColor: '#151439',
 
       },
       headline: {
@@ -131,9 +134,19 @@ const theme = createMuiTheme({
     },
 
     MuiListItemIcon: {
-      root: { // Name of the rule
+      root: { // Name of the 
           color: 'white',
           backgroundColor: 'transparant',
+      },
+    },
+    MuiSelect: {
+      select: { // Name of the rule
+          color: '#151439',
+          backgroundColor: 'white',
+          '&:focus': {
+            backgroundColor: 'white', // Some CSS
+            Color: '#151439', // Some CSS
+        }
       },
     },
     MuiListItem: {
@@ -141,7 +154,7 @@ const theme = createMuiTheme({
         color: 'white',
         '&:hover': {
           backgroundColor: '#151439', // Some CSS
-          Color: 'white', // Some CSS
+          color: 'white', // Some CSS
         }
       },
       button: { // Name of the rule
@@ -156,20 +169,26 @@ const theme = createMuiTheme({
     MuiIconButton: {
       root: { // Name of the rule
           color: 'white',
-          backgroundColor: 'transparant',
+          backgroundColor: 'white',
       }
     },
     MuiMenuItem: {
       root: { // Name of the rule
           color: '#151439',
           backgroundColor: 'White',
-      }
-    },
+      },
+    },  
 
     MuiDialog: {
       paperWidthSm: { // Name of the rule
        
           backgroundColor: 'white',
+      }
+    },
+    MuiButtonBase: {
+      root: { // Name of the rule
+       
+          backgroundColor: '#151439',
       }
     },
 

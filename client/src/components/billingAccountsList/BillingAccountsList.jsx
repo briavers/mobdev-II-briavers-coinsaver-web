@@ -58,10 +58,12 @@ class BillingAccountsList extends Component {
 
   
   render() {
-    let auth = JSON.parse(localStorage.getItem('mobdev2_auth'));
-   
+
+    
     let prefix = "./billingAccounts/"
     const { classes } = this.props;
+
+    this.state.billingAccounts = []
     if (this.state.tempBillingAccounts.length !== 0) {
       this.state.tempBillingAccounts.forEach(element => {
         console.log("element", element);
@@ -78,7 +80,7 @@ class BillingAccountsList extends Component {
               <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" key={i}>
                 
           
-                
+                <a href={prefix + element._id }>
                 <Card className={classes.card} key={ element._id }>
                   <CardMedia
                     className={classes.media}
@@ -92,13 +94,11 @@ class BillingAccountsList extends Component {
                     <Typography component="p">
                       € { element.savings }
                     </Typography>
-                    <Typography component="p">
-                      <a href=  {prefix + element._id }> test </a> 
-                    </Typography>
                   </CardContent>
                   <CardActions>
                   </CardActions>
                 </Card>
+                </a>
               </div>
             ))}
           </div>

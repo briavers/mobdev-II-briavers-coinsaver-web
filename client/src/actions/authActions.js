@@ -14,11 +14,14 @@ export function signInActionLocalStrategy({ email, password }, history) {
       };
       const response = await fetch('/api/v1/auth/local', options);
       const responseJson = await response.json();
-
+    
       dispatch({ 
         type: AUTHENTICATED,
         payload: responseJson
       });
+
+
+
       localStorage.setItem('mobdev2_auth', JSON.stringify(responseJson));
       window.location.href = '/billingAccounts';
     } catch(error) {
@@ -26,6 +29,7 @@ export function signInActionLocalStrategy({ email, password }, history) {
         type: AUTHENTICATION_ERROR,
         payload: 'Invalid email or password'
       });
+        alert('wrong email and or password')
 
     }
       checkAuth();

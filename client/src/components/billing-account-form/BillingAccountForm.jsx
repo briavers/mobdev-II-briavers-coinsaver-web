@@ -171,8 +171,8 @@ class BillingAccountForm extends Component {
             </div>
             
             <div className="col-12">
-              <label>Type of the card</label>
-              <Field className="ajaxField" name="type" component={Select} placeholder="Select a type" fullWidth={true}>
+              <label className='ajaxLabel'>Type of the card</label>
+              <Field className="ajaxField ajaxFieldTypeOfCard" id="ajaxFieldTypeOfCard" name="type" component={Select} placeholder="Select a type" fullWidth={true} >
                 { this.getTypesAsJSX() }
               </Field>
             </div>

@@ -64,10 +64,11 @@ const validate = values => {
 class SignUp extends Component {
 
   submit = (values) => {
-    if(this.props.errors){
+    if(values.password === values.confirmPassword){
+      this.props.signUp(values, this.props.history);
       //console.log('there were errors')
     }else {
-      this.props.signUp(values, this.props.history);
+      alert('passwords do not match')
       //console.log('no errors found', values)
     }
 

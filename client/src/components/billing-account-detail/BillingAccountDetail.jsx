@@ -209,18 +209,29 @@ class BillingAccountDetail extends Component {
 
       if(element.expenses.length == 0){  
           return (
-      
-        <div className="row">
-              <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3"> </div>
-            <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-              <img src={prefix + element._type.image} alt="picture of the card" className="cardImage" />
+            <div>
+              <div className="row">
+                    <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3"> </div>
+                  <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <img src={prefix + element._type.image} alt="picture of the card" className="cardImage" />
+                  </div>
+                    <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                  <div className="cardInformation"> 
+                    <p> {element.title} <br /> € {element.savings} </p>
+                  </div>
+                </div>
+
+              </div>
+              <div className="row">
+             
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                  <div className='sorryDiv'>
+                    <h2>sorry but you don't have any expenses yet, </h2>
+                    <h3> <a href="/expense-create"> go make them at create an expenses </a>  </h3>
+                  </div>
+                </div>
+              </div>
             </div>
-              <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-            <div className="cardInformation"> 
-              <p> {element.title} <br /> € {element.savings} </p>
-            </div>
-          </div>
-        </div>
           );
       }else{
         return (

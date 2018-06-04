@@ -115,8 +115,8 @@ class LoyaltyCardForm extends Component {
             
             
             <div className="col-12">
-              <label>Type of the card</label>
-              <Field className="ajaxField" name="storeImg" component={Select} placeholder="Select a type" fullWidth={true}>
+              <label className='ajaxLabel'>Type of the card</label>
+              <Field className="ajaxField ajaxFieldSelectStore" id= 'ajaxFieldSelectStore' name="storeImg" component={Select} placeholder="Select a type" fullWidth={true}>
                 <MenuItem value="./ah_logo.jpg" key="./ah_logo">Albert Hein</MenuItem>
                 <MenuItem value="./ava_logo.jpg" key="./ava_logo">AVA</MenuItem>
                 <MenuItem value="./aveve_logo.jpg" key="./aveve_logo">AVEVE</MenuItem>

@@ -55,7 +55,7 @@ class LoyaltyCardsList extends Component {
   }
   
   render() {
-
+    this.state.loyaltyCards = []
     if (this.state.tempLoyaltyCards.length !== 0) {
 
 

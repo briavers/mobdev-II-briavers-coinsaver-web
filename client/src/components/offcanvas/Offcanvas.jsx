@@ -156,16 +156,6 @@ class Offcanvas extends Component {
 
 
 
-          <ListItem
-            button
-            onClick={() => this.toggleBackofficeLists('postsOpen')}
-          >
-            <ListItemIcon>
-              <IconDescription />
-            </ListItemIcon>
-            <ListItemText inset primary="Posts" />
-            {this.state.backofficeLists.postsOpen ? <IconExpandLess /> : <IconExpandMore />}
-          </ListItem>
          
           <ListItem
             button

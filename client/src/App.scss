@@ -93,3 +93,49 @@ a{
 .row{
   margin-top: 2%
 }
+
+List Listitem{
+  background-color: blueviolet;
+}
+
+.MuiMenuItem-root-165.MuiMenuItem-selected-166 {
+  background-color : white !important;
+}
+
+.MuiMenuItem-root-177.MuiMenuItem-selected-178 {
+  background-color: white !important;
+}
+.ajaxField {
+  margin-top: 15px !important;
+  padding-top: 15px !important;
+  margin-left: 7% !important;
+  align-self: end !important;
+}
+#file {
+  margin-top: 5%;
+}
+.row .col-12 .row .col-12{
+  margin-top: 0;
+} 
+label.ajaxLabel{
+  bottom: 20px;
+}
+label.fileUpload{
+  bottom: 0px;
+  margin-right: 17%;
+}
+.ajaxFieldTypeOfCard{
+ left: 3.3% !important; 
+}
+.ajaxFieldbillingAccount{
+ left: 5% !important;
+}
+.ajaxFieldSelectSubCategory {
+ left: 7% !important;
+}
+.ajaxFieldSelectStore {
+ left: 3.5% !important;
+}
+.ajaxFieldSelectParentCategory{
+ left: 4% !important;
+}

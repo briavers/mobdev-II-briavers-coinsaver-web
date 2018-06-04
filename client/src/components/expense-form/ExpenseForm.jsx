@@ -153,11 +153,14 @@ class ExpenseForm extends Component {
   getSubCategoriesAsJSX = () => {
     let typeElements = '';
     if (this.state.subCategories) {
+      console.log(this.state.subCategories)
       typeElements = this.state.subCategories.map(
         (element) => {
+          if (element.deleted_at === null || element.deleted_at === undefined){
           return (
-            <MenuItem value={ element._id } key={ element._id }>{ element.title }</MenuItem>
+            <MenuItem fullWidth={true} value={ element._id } key={ element._id }>{ element.title }</MenuItem>
           );
+          }
         }
       )
     };
@@ -214,21 +217,26 @@ class ExpenseForm extends Component {
             </div>
             
             <div className="col-12">
-              <label>Billing Account</label>
-              <Field className="ajaxField" name="billingAccount" component={Select} placeholder="Select a billing Account" fullWidth={true}>
+              <label className='ajaxLabel'>Billing Account</label>
+              <Field className="ajaxField ajaxFieldbillingAccount" id="ajaxFieldbillingAccount" name="billingAccount" component={Select} placeholder="Select a billing Account" fullWidth={true}>
                 { this.getBillingAccountsAsJSX() }
               </Field>
             </div>
             
             <div className="col-12">
-              <label>sub Category</label>
-              <Field className="ajaxField" name="subCategory" component={Select} placeholder="Select a subcategory" fullWidth={true}>
+              <label className='ajaxLabel'>sub Category</label>
+              
+              <Field className="ajaxField ajaxFieldSelectSubCategory" id="ajaxFieldSelectSubCategory" name="subCategory" component={Select} placeholder="Select a subcategory" fullWidth={true}>
+           
                 { this.getSubCategoriesAsJSX() }
+            
               </Field>
+                
             </div>
             
 
             <div className="col-12">
+              <label class='fileUpload'>file Upload</label>
               <input type="file" name="uploadImage" id="file"/>
             </div>
 
