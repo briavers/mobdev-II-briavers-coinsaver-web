@@ -73,13 +73,14 @@ exports.expense_create_expense = function(req, res, next) {
   if (!req.body || !req.body.title || !req.body.amount || !req.body.description || !req.body._subCategory || !req.body._billingAccount) {
     return errorHandler.handleAPIError(400, `Expense must have a title, amount, body and _category`, next);
   }
+  let expenseImgPath = req.file? req.file.path : undefined
   const newBody = {
     title: req.body.title,
     amount: req.body.amount,
     description: req.body.description,
     _subCategorie: req.body._subCategory,
     _billingAccount: req.body._billingAccount,
-   // expenseImage: req.file.path,
+    expenseImage: expenseImgPath,
     user: req.body.user
 
   }

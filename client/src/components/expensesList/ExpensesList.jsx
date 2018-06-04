@@ -251,44 +251,16 @@ class ExpensesList extends Component {
   }
 
   componentWillMount() {
-    this.loadTempExpenses();
+    this.state.tempExpenses = [];
+    fetch('/api/v1/expenses')
+      .then(response => response.json())
+      .then(item => this.setState({ tempExpenses: item })); 
   }
 
-  loadTempExpenses = () => {
-    if(this.state.tempExpenses.length>0){
-      console.log('this was the case')
-    }else {
-      fetch('/api/v1/expenses')
-        .then(response => response.json())
-        .then(item => this.setState({ tempExpenses: item }));
-    }
 
-  }
 
   getExpensesAsJSX() {
     let containerElement = '';
-    //console.log(this.state.expenses);
-    if (this.state.expenses.length > 0) {
-      console.log('this was the case')
-    } else {
-    console.log("tempExpenses", this.state.tempExpenses)
-    if (this.state.tempExpenses.length !== 0) {
-
-
-      this.state.tempExpenses.forEach(element => {
-        console.log("we check an element", element );
-        console.log("we check an element", logginInUser );
-        if (element.user === logginInUser) {
-          this.state.expenses.push(element);
-        }
-        console.log(" this state expenses",this.state.expenses)
-      });
-    }
-  }
-
-
-
-
     if (this.state.expenses) {
       containerElement = this.state.expenses.map((expense, index) => (
        
@@ -320,9 +292,36 @@ class ExpensesList extends Component {
     return containerElement;
   }
 
+
+
+
+
+
+
+
+
   render() {
+
+
+    console.log("this.state.tempExpenses", this.state.tempExpenses);
+      if (this.state.tempExpenses.length !== 0) {
+        this.state.tempExpenses.forEach(element => {
+          console.log("we check an element", element);
+          console.log("we check an element", logginInUser);
+          if (element.user === logginInUser) {
+            this.state.expenses.push(element);
+          }
+          console.log(" this state expenses", this.state.expenses)
+        });
+      }
+    
+
+
+
+
+
    // const { classes } = this.props;
-    if(this.state.expenses > 0 ) {
+    if(this.state.expenses.length > 0 ) {
       return (
         <div>
           <Table className="thead" >
@@ -363,7 +362,10 @@ class ExpensesList extends Component {
           </Dialog>
         </div>
       )
-    }else {
+    }
+    
+    
+    else {
       return (
         <div className='sorryDiv'>
           <h2>sorry but you don't have any expenses yet, </h2>
